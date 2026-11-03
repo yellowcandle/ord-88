@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.DS_Store
+.tokensave/
+.rebuild_backup/
+.claude/
+.venv/
+s88list_emb.pdf
+s88list_emb.md
+*.pdf

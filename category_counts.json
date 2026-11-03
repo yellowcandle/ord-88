@@ -1,0 +1,41 @@
+{
+  "total": 17623,
+  "counts": {
+    "EDU": 2588,
+    "ASN": 1448,
+    "REL": 4621,
+    "COM": 292,
+    "ART": 738,
+    "ENV": 305,
+    "ELD": 198,
+    "CLN": 93,
+    "SPT": 151,
+    "FND": 2290,
+    "WEL": 2030,
+    "YTH": 680,
+    "OTH": 179,
+    "DIS": 265,
+    "MED": 1290,
+    "WOM": 282,
+    "BIZ": 173
+  },
+  "labels": {
+    "REL": "Religious 宗教",
+    "EDU": "Education 教育",
+    "MED": "Medical & Health 醫療衞生",
+    "ELD": "Elderly 長者",
+    "DIS": "Disability & Rehab 復康傷健",
+    "YTH": "Youth & Children 青少年兒童",
+    "WOM": "Women 婦女",
+    "ART": "Arts & Culture 文化藝術",
+    "SPT": "Sports & Recreation 體育康樂",
+    "ENV": "Animals & Environment 動物環保",
+    "CLN": "Clan & Native-place 宗親同鄉",
+    "COM": "Community & Kaifong 社區街坊",
+    "BIZ": "Professional & Business 專業商會",
+    "WEL": "Social Welfare & Services 社會福利服務",
+    "FND": "Foundation & Trust 基金信託",
+    "ASN": "Clubs & Associations 會社協會",
+    "OTH": "Other / Uncategorised 其他"
+  }
+}

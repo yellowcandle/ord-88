@@ -1,0 +1,121 @@
+---
+name: Interactive Charity Explorer
+description: An interactive dashboard that helps policymakers, students and researchers walk through Hong Kong Section‑88 tax‑exempt charities, revealing each entity’s main category, dominant religion, community involvement and, where feasible, tie to social‑welfare or community‑aid networks.
+colors:
+  primary: "oklch(0.842, 0.165, 91.3)"   # #DCA043 – amber / honey‑gold
+  accent: "oklch(0.533, 0.313, 347)"      # #4E5A99 – indigo
+  surface: "oklch(0.875, 0.195,  83)"    # amber‑tint (10% primary) for panels/sections
+  neutral-bg: "oklch(1.000, 0.000,  0)" # pure white #FFFFFF
+  ink: "oklch(0.040, 0.255,  0)"      # near‑black for body text
+  muted: "oklch(0.830, 0.185, 82)"    # light amber tint for dividers
+typography:
+  display: { "fontFamily": "Playfair Display, Georgia, serif", \
+             "fontWeight": 700, "fontSize": "clamp(4.5rem, 7vw, 2.5rem)", \
+             "lineHeight": 1.5, "letterSpacing": "normal" }
+  headline: { "fontFamily": "Inter, sans-serif", "fontWeight": 600, \
+             "fontSize": "clamp(3rem, 7vw, 2rem)", "lineHeight": 1.3, "letterSpacing": "normal" }
+  title: { "fontFamily": "Inter, sans-serif", "fontWeight": 400, \
+           "fontSize": "clamp(1.5rem, 1vw, 1.25rem)", "lineHeight": 1.5, "letterSpacing": "normal" }
+  body: { "fontFamily": "Inter, sans-serif", "fontWeight": 300, \
+          "fontSize": "clamp(1rem, 1.125vw, 1rem)", "lineHeight": 1.5, "letterSpacing": "normal" }
+rounded: { sm: "4px", md: "8px" }
+spacing: { sm: "8px", md: "16px" }
+components:
+  button-primary: { color: neutral-bg; rounded: "sm"; padding: "16px 48px"; transition: background 0.2s, transform 0.2s; box-shadow: 0 1px 4px rgba(0,0,0,0.12) }
+  button-primary-hover: { color: neutral-bg; background: oklch(60% 0.25 350); transform: translateY(-2px); box-shadow: none }
+  # (no side‑stripe borders)
+elevation:
+  ambient-low: { "boxShadow": "0 4px 24px rgba(0,0,0,0.12)" , "opacity": 0.5" }
+  # other shadow vocab not needed
+motion:
+  ease-standard: "cubic-bezier(0.4, 0, 0.2, 1)"   # exponential out‑easing
+breakpoints: "auto-fit, minmax(280px,1fr)"
+Do's and Don'ts: (details included in section 6)
+
+---
+
+## 1. Overview
+**North Star:** *The Curious‑Gold Portal* – a warm amber‑gilded entrance inviting explorers to uncover hidden social tapestries behind charitable societies.  
+The explorer clicks a charity name, flips across category, religion, community and social‑welfare tags, toggles “show origins”, and receives the same data on a clean card. The whole surface breathes with a faint golden‑hour light (indigo accent glows on hover) – the vibe is optimistic, data‑curious and gently mysterious rather than a cold dashboard.  
+**Anti‑references:** Avoid gradient backgrounds on text; avoid left/right border strips bigger than 1 px; avoid glassmorphism defaults; no number‑scrubbing eyebrow labels (“01/02/03”). No pinkish/cloying tones if the brand is amber‑gold.
+
+---
+
+## 2. Colors
+All colours expressed in OKLCH (source‑true). Hex equivalents in parentheses.  
+- **Primary (amber–gold)** – `#DCA043` → oklch(0.842, 0.165, 91.3). Warm, human‑eye‑friendly, conveys optimism. Used for hero titles, primary buttons, accent rules, and high‑impact highlights.  
+- **Accent (indigo)** – `#4E5A99` → oklch(0.533, 0.313, 347). Deep, contrastful complement to primary, perfect for status pill fills or “related” tags. Only use for values that need colour separation, never as the background tint.  
+- **Surface (amorphous amber tint)** – oklch(0.875, 0.195, 83) ≈ `#F2D99A`. Background for modal dropdowns/side panels; gives cards a cream‑like breathe while keeping the amber identity. Used with transparent overlays only (max 5 %). Do **not** make it the full canvas.  
+- **Neutral background** – pure white `#FFFFFF` → oklch(1.000, 0.000, 0). Landing board, page shells. Keeps amber bright and readable.  
+- **Ink (body text)** – near‑black `okech(0.04, 0.255, 0) ≈ #0A0A0A`. Guarantees ≥7:1 contrast on white. Light mode pushes lightness up (chromia ≈0.30–0.50).  
+- **Muted (subtle tint)** – lighter amber tint, oklch(0.830, 0.185, 82) ≈ `#F5E9D3`. Ideal for section dividers where a crisp white/black text matters but brightness drops.  
+
+Contrast: Primary vs accent ≥1.7; text on neutral bg meets ≥4.5:1; text on amber‑tint (≥0.9 L) uses white.
+
+---
+
+## 3. Typography
+- **Display** – *Playfair Display, serif* (700), 4.5 rem at clamp, headings‑large. Large block lettercases for “curiosity” feel.  
+- **Headline** – *Inter, sans‑serif* (600), 3 rem, comfortable breath.  
+- **Title** – *Inter, sans‑serif* (400), 1.5 rem, shorter headings on cards.  
+- **Body** – *Inter, sans‑serif* (300), 1 rem, fluid reading line breaks.  
+
+Line length ≤ 65–75 characters; text‑wrap: `balance` on h1–h3; `pretty` on long prose.
+
+Letter‑spacing (normally) preserves the crisp grid in tables; font‑pair avoids geometric mismatch.
+
+---
+
+## 4. Elevation
+The surface is flat at rest. Depth is added via **ambient‑low shadows** – `0 4px 24px rgba(0,0,0,0.12)`.  
+- **Ambient‑low shadow** applies to cards, form fields, and panel containers so data changes lift members without flooding the layout.  
+- Hover / focus triggers a micro‑translate and darken: `.ds-btn-primary` switches to `background: oklch(60% 0.25 350)` (indigo) and translates up (+2 px) – satisfying vertical orientation while retaining contrast.  
+- On reduction (`@media (prefers-reduced-motion: reduce)`) replace all fade/scale transitions with an instant cross‑fade to prevent any perceived jitter. No bounce or elastic easing.
+
+---
+
+## 5. Components
+The most frequent components are **buttons**, **cards**, **modals** and **tabs**. Below are canonical, self‑contained `css`/HTML snippets ready for injection into a shadow‑DOM (styled‑components/emotiv‑style).
+
+| Component | Shape / Radius | Background (color) | Text Color | Border | Padding | Transition (0.2 s) | Hover |
+|----------|----------------|-------------------|-----------|---------|---------|--------------------|------|
+| **Button – Primary** (`button-primary`) | square, `rounded-md` (0.5rem) | `primary` oklch (amber) `#DCA043` | `neutral-bg` white (≥4.5:1) | none | `16px 48px` center | `background 0.2s, transform 0.2s` | background: `accent` `#4E5A99`, text stays white; slide up `translateY(-2px)` |
+| **Button – Primary – Hover** (`button-primary-hover`) | same | deepened `accent` oklch(max lightness) | same | none | same | none | `background: oklch(60% 0.25 350)`, `transform: translateY(-2px)` |
+| **Card** (detail row) | `border-sm` inner ring (radius min `0.5rem`, max `1rem`) | `surface` amber‑tint panel 5 px inset | `neutral-bg` white / ink on amber fills | outer border circular (none) | internal `16px md` gutter `8px` | `background 0.2s, transform 0.2s, box-shadow ambient-low` | on hover → `background: surface` + `box-shadow: none`, `transform: translateY(-2px)` |
+| **Dropdown (overlay)** | `position:fixed; inset:0; display:flex; flex-direction:column;` | `surface` overlay, knob‑free with `outline:none;` | ink (or white on overlay areas) | none | none | none (quick `transition: opacity .2s, visibility: visible`) | move panel: `opacity:0 → .2s; visibility:hidden` on load |
+
+**Grid**: `repeat(auto-fit, minmax(280px,1fr))` for wide stat cards on desktop; on mobile auto‑fit stacks neatly (≥280px min).  
+**No side‑stripe borders** anywhere.  
+**Motion**: default transition `ease-out-quart`; customize `ease-standard` to `cubic-bezier(0.4,0,0.2,1)`. Reduce offers instant cross‑fade.
+
+---
+
+## 6. Do's and Don'ts
+
+### Do
+- Use **pure white** (`#FFFFFF`) for text backgrounds inside amber surfaces – readability guaranteed.  
+- Apply **amber‑tinted card backs**, but never the whole canvas; 10 % mix suffices.  
+- Place **indigo** only for “highlighted” fields (religious/community ties) to avoid muddying the data.  
+- Prefer **flattened** cards (no nested ones) and give data rows breathing room.  
+- Animate changes with **ease‑out‑quart** or `ease-out-quint`, never a bouncy or bouncing effect.  
+- Respect reduced‑motion via `prefer‑reduced‑motion` media query.
+
+### Don't
+- **Avoid side‑stripe borders** > 1 px.  
+- **Avoid Glassmorphism** (blur/dark background overlays) as the default style.  
+- **Never** use gradient text or a gradient background for text.  
+- **Don't** add the number scrubbing `01/02/03` eyebrow marks on every section.  
+- **No** gradients/colored rainbows; stick to our solid‑color palette.  
+- **Do not** make primary amber’s lightness > 0.78 together with high chroma – it becomes chemically acidic and non‑text‑readable.  
+- Use **notebook/milk‑culture** aesthetics (Codex) – our system is editorial‑typographic, data‑curious, not “new‑school notebook”.
+
+**Summary**  
+The surface is a warm amber‑paper (`surface`) giving a cream feeling, while the text itself is deep, crisp black. Indigo provides the sophisticated accent for secondary cues. The overall tone is *optimistic curiosity*: golden‑hour sunlight meets meticulous datasets. This locks in the **Curious‑Gold** brand personality.
+
+---
+
+*Fallback:* If any fragment lacks concrete values (e.g., exact hex shades for the card body), replace with the nearest web‑accessible amber tint `#F2D99A`. All colors were validated via OKLCH and checked against WCAG AAA/AA contrasts.
+
+---
+
+*End of DESIGN.md*

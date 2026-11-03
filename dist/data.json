@@ -1,0 +1,394 @@
+{
+  "total": 17623,
+  "as_at": "30 September 2026",
+  "as_at_zh": "2026年9月30日",
+  "religious_band": 4621,
+  "religious_total": 4582,
+  "tradition_count": 12,
+  "denomination_count": 13,
+  "denomination_total": 3410,
+  "community_total": 254,
+  "purposes": [
+    {
+      "en": "Religious",
+      "zh": "宗教",
+      "count": 4621,
+      "share": 26.2
+    },
+    {
+      "en": "Education",
+      "zh": "教育",
+      "count": 2588,
+      "share": 14.7
+    },
+    {
+      "en": "Foundation & Trust",
+      "zh": "基金信託",
+      "count": 2290,
+      "share": 13.0
+    },
+    {
+      "en": "Social Welfare & Services",
+      "zh": "社會福利服務",
+      "count": 2030,
+      "share": 11.5
+    },
+    {
+      "en": "Clubs & Associations",
+      "zh": "會社協會",
+      "count": 1448,
+      "share": 8.2
+    },
+    {
+      "en": "Medical & Health",
+      "zh": "醫療衞生",
+      "count": 1290,
+      "share": 7.3
+    },
+    {
+      "en": "Arts & Culture",
+      "zh": "文化藝術",
+      "count": 738,
+      "share": 4.2
+    },
+    {
+      "en": "Youth & Children",
+      "zh": "青少年兒童",
+      "count": 680,
+      "share": 3.9
+    },
+    {
+      "en": "Animals & Environment",
+      "zh": "動物環保",
+      "count": 305,
+      "share": 1.7
+    },
+    {
+      "en": "Community & Kaifong",
+      "zh": "社區街坊",
+      "count": 292,
+      "share": 1.7
+    },
+    {
+      "en": "Women",
+      "zh": "婦女",
+      "count": 282,
+      "share": 1.6
+    },
+    {
+      "en": "Disability & Rehab",
+      "zh": "復康傷健",
+      "count": 265,
+      "share": 1.5
+    },
+    {
+      "en": "Elderly",
+      "zh": "長者",
+      "count": 198,
+      "share": 1.1
+    },
+    {
+      "en": "Other / Uncategorised",
+      "zh": "其他",
+      "count": 179,
+      "share": 1.0
+    },
+    {
+      "en": "Professional & Business",
+      "zh": "專業商會",
+      "count": 173,
+      "share": 1.0
+    },
+    {
+      "en": "Sports & Recreation",
+      "zh": "體育康樂",
+      "count": 151,
+      "share": 0.9
+    },
+    {
+      "en": "Clan & Native-place",
+      "zh": "宗親同鄉",
+      "count": 93,
+      "share": 0.5
+    }
+  ],
+  "stage1": [
+    {
+      "en": "Religious",
+      "zh": "宗教",
+      "count": 4621,
+      "share": 26.2,
+      "height": 140
+    },
+    {
+      "en": "Education",
+      "zh": "教育",
+      "count": 2588,
+      "share": 14.7,
+      "height": 84
+    },
+    {
+      "en": "Foundation & Trust",
+      "zh": "基金信託",
+      "count": 2290,
+      "share": 13.0,
+      "height": 72
+    },
+    {
+      "en": "Social Welfare & Services",
+      "zh": "社會福利服務",
+      "count": 2030,
+      "share": 11.5,
+      "height": 68
+    },
+    {
+      "en": "Clubs & Associations",
+      "zh": "會社協會",
+      "count": 1448,
+      "share": 8.2,
+      "height": 48
+    },
+    {
+      "en": "Medical & Health",
+      "zh": "醫療衞生",
+      "count": 1290,
+      "share": 7.3,
+      "height": 44
+    },
+    {
+      "en": "11 further purposes",
+      "zh": "其餘11項用途",
+      "count": 3356,
+      "share": 19.0,
+      "height": 104
+    }
+  ],
+  "traditions": [
+    {
+      "en": "Protestant Christian",
+      "zh": "基督新教",
+      "count": 3410,
+      "share": 74.4,
+      "height": 200
+    },
+    {
+      "en": "Buddhism",
+      "zh": "佛教",
+      "count": 484,
+      "share": 10.6,
+      "height": 36
+    },
+    {
+      "en": "Roman Catholic",
+      "zh": "天主教",
+      "count": 362,
+      "share": 7.9,
+      "height": 28
+    },
+    {
+      "en": "Taoism",
+      "zh": "道教",
+      "count": 135,
+      "share": 2.9,
+      "height": 16
+    },
+    {
+      "en": "8 other traditions",
+      "zh": "其餘8個傳統",
+      "count": 191,
+      "share": 4.2,
+      "height": 20
+    }
+  ],
+  "stage2_full": [
+    {
+      "en": "Protestant Christian",
+      "zh": "基督新教",
+      "count": 3410,
+      "share": 74.4
+    },
+    {
+      "en": "Buddhism",
+      "zh": "佛教",
+      "count": 484,
+      "share": 10.6
+    },
+    {
+      "en": "Roman Catholic",
+      "zh": "天主教",
+      "count": 362,
+      "share": 7.9
+    },
+    {
+      "en": "Taoism",
+      "zh": "道教",
+      "count": 135,
+      "share": 2.9
+    },
+    {
+      "en": "Chinese folk religion",
+      "zh": "民間信仰",
+      "count": 70,
+      "share": 1.5
+    },
+    {
+      "en": "Other Christian",
+      "zh": "其他基督宗教",
+      "count": 52,
+      "share": 1.1
+    },
+    {
+      "en": "Islam",
+      "zh": "伊斯蘭教",
+      "count": 42,
+      "share": 0.9
+    },
+    {
+      "en": "Hindu",
+      "zh": "印度教",
+      "count": 8,
+      "share": 0.2
+    },
+    {
+      "en": "Other / unclear",
+      "zh": "其他／不明",
+      "count": 8,
+      "share": 0.2
+    },
+    {
+      "en": "Jewish",
+      "zh": "猶太教",
+      "count": 4,
+      "share": 0.1
+    },
+    {
+      "en": "Sikh",
+      "zh": "錫克教",
+      "count": 4,
+      "share": 0.1
+    },
+    {
+      "en": "Confucianism",
+      "zh": "孔教",
+      "count": 3,
+      "share": 0.1
+    }
+  ],
+  "denominations": [
+    {
+      "en": "Independent",
+      "count": 1111,
+      "share": 32.6
+    },
+    {
+      "en": "Lutheran",
+      "count": 451,
+      "share": 13.2
+    },
+    {
+      "en": "Evangelical",
+      "count": 367,
+      "share": 10.8
+    },
+    {
+      "en": "Baptist",
+      "count": 352,
+      "share": 10.3
+    },
+    {
+      "en": "Alliance",
+      "count": 340,
+      "share": 10.0
+    },
+    {
+      "en": "Pentecostal",
+      "count": 239,
+      "share": 7.0
+    },
+    {
+      "en": "Methodist",
+      "count": 151,
+      "share": 4.4
+    },
+    {
+      "en": "Salvation Army",
+      "count": 151,
+      "share": 4.4
+    },
+    {
+      "en": "Anglican",
+      "count": 134,
+      "share": 3.9
+    },
+    {
+      "en": "Presbyterian",
+      "count": 50,
+      "share": 1.5
+    },
+    {
+      "en": "Adventist",
+      "count": 39,
+      "share": 1.1
+    },
+    {
+      "en": "Brethren",
+      "count": 23,
+      "share": 0.7
+    },
+    {
+      "en": "Unstated",
+      "count": 2,
+      "share": 0.1
+    }
+  ],
+  "community": [
+    {
+      "en": "Mutual aid",
+      "zh": "互助服務",
+      "count": 86,
+      "share": 33.9
+    },
+    {
+      "en": "Kaifong welfare",
+      "zh": "街坊福利",
+      "count": 71,
+      "share": 28.0
+    },
+    {
+      "en": "Civil society",
+      "zh": "公民社會",
+      "count": 32,
+      "share": 12.6
+    },
+    {
+      "en": "Unclear",
+      "zh": "不明",
+      "count": 22,
+      "share": 8.7
+    },
+    {
+      "en": "Rural / indigenous",
+      "zh": "鄉事原居民",
+      "count": 18,
+      "share": 7.1
+    },
+    {
+      "en": "Owners / residents",
+      "zh": "業主居民",
+      "count": 17,
+      "share": 6.7
+    },
+    {
+      "en": "Patriotic-named",
+      "zh": "愛國建制",
+      "count": 7,
+      "share": 2.8
+    },
+    {
+      "en": "Native-place",
+      "zh": "同鄉",
+      "count": 1,
+      "share": 0.4
+    }
+  ]
+}

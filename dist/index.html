@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1600">
+<title>The register, resolved · Section 88</title>
+<style>
+@font-face{font-family:"Bricolage Grotesque";src:url(fonts/bricolage-grotesque.woff2) format("woff2");font-weight:400 500;font-display:swap}
+@font-face{font-family:"DM Sans";src:url(fonts/dm-sans.woff2) format("woff2");font-weight:400 500;font-display:swap}
+@font-face{font-family:"Geist Mono";src:url(fonts/geist-mono.woff2) format("woff2");font-weight:400 500;font-display:swap}
+
+:root{--ink:#17171A;--ink2:#5C5A56;--line:#E4E1DE;--bg:#fff;
+--r1:#8C3A1E;--r2:#A8482A;--r3:#B4552F;--r4:#C26A42;--r5:#CC8158;--r6:#D5966F;--r7:#DDA986;
+--n1:#23211E;--n2:#6E6A65;--n3:#85807A;--n4:#A39E97;--n5:#C2BDB6;
+--display:"Bricolage Grotesque",Georgia,serif;--body:"DM Sans",-apple-system,"PingFang HK","Noto Sans TC",sans-serif;
+--mono:"Geist Mono",ui-monospace,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:var(--body);font-size:12px}
+.plate{width:1600px;margin:0 auto;padding:32px 56px 24px}
+a{color:inherit}
+.plate-head{display:grid;grid-template-columns:1fr auto;align-items:start;gap:24px}
+.title h1{font-family:var(--display);font-size:22px;font-weight:500;margin:0;line-height:1.1}
+.title .zh{margin:6px 0 0;color:var(--ink2);font-size:12px}
+.meta{text-align:right;color:var(--ink2);font-family:var(--mono);font-size:11px;line-height:1.7}
+.rule{border:0;border-top:1px solid var(--ink);margin:16px 0 0}
+.statement{display:grid;grid-template-columns:380px 420px 1fr;gap:40px;align-items:start;margin:20px 0 24px}
+.hero{font-family:var(--display);font-size:92px;font-weight:500;line-height:1;letter-spacing:-.02em}
+.deck{color:var(--ink2);line-height:1.55;font-size:12px;margin:0}
+.deck.zh{line-height:1.75;font-family:var(--body)}
+.caption{font-family:var(--mono);font-size:11px;color:var(--ink2);margin:0 0 12px}
+.charts{display:grid;grid-template-columns:1fr 464px;gap:80px;align-items:start}
+.stage1-chart{display:grid;grid-template-columns:8px 240px 1fr 64px 56px;column-gap:8px}
+.source{background:var(--ink);grid-row:1 / span 7}
+.band-row{display:contents}
+.band{height:var(--band-h);background:var(--fill)}
+.band-label{display:flex;flex-direction:column;justify-content:center;gap:2px;position:relative;padding-left:36px}
+.band-label::before{content:"";position:absolute;left:0;top:50%;width:28px;height:1px;background:var(--line)}
+.band-label .en{font-size:13.5px;font-weight:500}
+.band-label .zh{font-size:11px;color:var(--ink2)}
+.band-count,.band-share{align-self:center;text-align:right;font-family:var(--mono)}
+.band-count{font-size:12px}
+.band-share{font-size:11px;color:var(--ink2)}
+.trad-chart{position:relative;height:320px;display:grid;grid-template-columns:8px 150px 1fr;column-gap:8px}
+.trad-source{background:var(--ink);height:300px}
+.trad-bands{position:relative;height:300px}
+.trad-band{position:absolute;left:0;width:150px;background:var(--fill);height:var(--trad-h);box-shadow:inset 0 0 0 1px rgba(23,23,26,.16)}
+.trad-labels{position:relative}
+.trad-label{position:absolute;left:0;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.trad-label .swatch{width:8px;height:8px;background:var(--fill);flex:none}
+.trad-label .name{font-size:12px}
+.trad-label .n{font-family:var(--mono);font-size:12px;color:var(--ink)}
+.trad-label .n{margin-left:auto}
+.trad-label.lead{display:block;left:0;top:88px;white-space:normal}
+.trad-label.lead .name{font-size:13.5px;font-weight:500;display:block}
+.trad-label.lead .sub{font-size:11px;color:var(--ink2);display:block;margin-top:8px}
+.trad-legend-head{position:absolute;left:0;top:176px;font-family:var(--mono);font-size:11px;color:var(--ink2)}
+.trad-note{font-size:12px;color:var(--ink2);margin:8px 0 0;line-height:1.5}
+.stage3{margin-top:22px;border-top:1px solid var(--ink);padding-top:12px}
+.denom-strip{display:flex;height:24px;margin:6px 0 12px}
+.denom-strip span{display:block;height:24px;background:var(--fill)}
+.denom-list{display:grid;grid-template-rows:repeat(7,auto);grid-auto-flow:column;column-gap:24px;row-gap:3px;margin:0;padding:0;list-style:none}
+.denom-list li{display:grid;grid-template-columns:1fr 52px;gap:8px;font-size:11px}
+.denom-list .n{font-family:var(--mono);text-align:right}
+.schedule-wrap{display:grid;grid-template-columns:1fr 1fr;column-gap:48px;margin-top:28px;border-top:1px solid var(--ink);padding-top:10px}
+table.schedule{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
+table.schedule caption{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+table.schedule th{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--ink2);text-align:left;padding:0 0 6px;border-bottom:1px solid var(--ink)}
+table.schedule th.num{text-align:right}
+table.schedule th .zh{display:block;font-family:var(--body);font-size:11px}
+table.schedule td{padding:5px 0;border-bottom:1px solid var(--line)}
+td.rank,td.count,td.share{font-family:var(--mono);text-align:right;color:var(--ink2);font-size:11px}
+td.name{color:var(--ink)}
+td.count{color:var(--ink);font-size:12px;width:64px}
+td.rank{width:24px;text-align:left}
+td.share{width:48px}
+.foot{margin-top:18px;border-top:1px solid var(--ink);padding-top:10px;display:grid;grid-template-columns:1fr auto;gap:24px}
+.foot .source-line,.foot .imprint{font-family:var(--mono);font-size:11px;color:var(--ink2)}
+.foot .note{font-size:12px;color:var(--ink2);line-height:1.5;margin:6px 0 0;max-width:1100px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.imprint{text-align:right;align-self:end}
+@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<main class="plate">
+<header class="plate-head">
+<div class="title"><h1>The register, resolved</h1><p class="zh" lang="zh-Hant">登記冊，分流</p></div>
+<div class="meta">As at 30 September 2026 · 截至2026年9月30日<br>IRD s88list.csv · 稅務局登記冊</div>
+</header>
+<hr class="rule">
+<section class="statement">
+<div class="hero">17,623</div>
+<p class="deck">Every society on the register resolves into one of 17 purposes. Of the 4,621 religious societies, 4,582 carry a faith classification; those resolve again into 12 traditions and 13 Protestant groupings. Band height is the number of societies — never a share of a share.</p>
+<p class="deck zh" lang="zh-Hant">登記冊上的每一間社團，最終都歸入 17 個用途之一。4,621 間宗教社團中，4,582 間有信仰分類，再分為 12 個傳統，其中基督新教再分為 13 個教派。色帶的高度就是社團數目，不是比例。</p>
+</section>
+<div class="charts">
+<section>
+<p class="caption">Stage 1 · Purposes · 用途</p>
+<div class="stage1-chart" aria-hidden="true">
+<div class="source"></div>
+<div class="band-row"><div class="band" style="--band-h:140px;--fill:var(--r1)"></div><div class="band-label"><span class="en">Religious</span><span class="zh" lang="zh-Hant">宗教</span></div><div class="band-count">4,621</div><div class="band-share">26.2%</div></div><div class="band-row"><div class="band" style="--band-h:84px;--fill:var(--r2)"></div><div class="band-label"><span class="en">Education</span><span class="zh" lang="zh-Hant">教育</span></div><div class="band-count">2,588</div><div class="band-share">14.7%</div></div><div class="band-row"><div class="band" style="--band-h:72px;--fill:var(--r3)"></div><div class="band-label"><span class="en">Foundation &amp; Trust</span><span class="zh" lang="zh-Hant">基金信託</span></div><div class="band-count">2,290</div><div class="band-share">13.0%</div></div><div class="band-row"><div class="band" style="--band-h:68px;--fill:var(--r4)"></div><div class="band-label"><span class="en">Social Welfare &amp; Services</span><span class="zh" lang="zh-Hant">社會福利服務</span></div><div class="band-count">2,030</div><div class="band-share">11.5%</div></div><div class="band-row"><div class="band" style="--band-h:48px;--fill:var(--r5)"></div><div class="band-label"><span class="en">Clubs &amp; Associations</span><span class="zh" lang="zh-Hant">會社協會</span></div><div class="band-count">1,448</div><div class="band-share">8.2%</div></div><div class="band-row"><div class="band" style="--band-h:44px;--fill:var(--r6)"></div><div class="band-label"><span class="en">Medical &amp; Health</span><span class="zh" lang="zh-Hant">醫療衞生</span></div><div class="band-count">1,290</div><div class="band-share">7.3%</div></div><div class="band-row"><div class="band" style="--band-h:104px;--fill:var(--r7)"></div><div class="band-label"><span class="en">11 further purposes</span><span class="zh" lang="zh-Hant">其餘11項用途</span></div><div class="band-count">3,356</div><div class="band-share">19.0%</div></div>
+</div>
+</section>
+<section>
+<p class="caption">Stage 2 · Traditions · 信仰傳統</p>
+<div class="trad-chart" aria-hidden="true">
+<div class="trad-source"></div>
+<div class="trad-bands"><div class="trad-band" style="--trad-h:200px;--fill:var(--r1)"></div><div class="trad-band" style="--trad-h:36px;--fill:var(--n2)"></div><div class="trad-band" style="--trad-h:28px;--fill:var(--n3)"></div><div class="trad-band" style="--trad-h:16px;--fill:var(--n4)"></div><div class="trad-band" style="--trad-h:20px;--fill:var(--n5)"></div></div>
+<div class="trad-labels"><div class="trad-label lead" style="--fill:var(--r1)"><span class="name">Protestant Christian</span><span class="sub" lang="zh-Hant">基督新教 · 3,410</span></div><div class="trad-label" style="top:224px;--fill:var(--n2)"><span class="swatch"></span><span class="name">Buddhism · <span lang="zh-Hant">佛教</span></span><span class="n">484</span></div><div class="trad-label" style="top:244px;--fill:var(--n3)"><span class="swatch"></span><span class="name">Roman Catholic · <span lang="zh-Hant">天主教</span></span><span class="n">362</span></div><div class="trad-label" style="top:264px;--fill:var(--n4)"><span class="swatch"></span><span class="name">Taoism · <span lang="zh-Hant">道教</span></span><span class="n">135</span></div><div class="trad-label" style="top:284px;--fill:var(--n5)"><span class="swatch"></span><span class="name">8 other traditions · <span lang="zh-Hant">其餘8個傳統</span></span><span class="n">191</span></div><div class="trad-legend-head">Other traditions · 其餘傳統</div></div>
+</div>
+<ul class="sr-only"><li>Protestant Christian: 3,410</li><li>Buddhism: 484</li><li>Roman Catholic: 362</li><li>Taoism: 135</li><li>Chinese folk religion: 70</li><li>Other Christian: 52</li><li>Islam: 42</li><li>Hindu: 8</li><li>Other / unclear: 8</li><li>Jewish: 4</li><li>Sikh: 4</li><li>Confucianism: 3</li></ul>
+<p class="trad-note">Protestant Christian holds 74.4% of the 4,582 classified religious societies — and 19.3% of the register.</p>
+<div class="stage3">
+<p class="caption">Stage 3 · 13 Protestant groupings within 3,410 · 基督新教分組</p>
+<div class="denom-strip" aria-hidden="true"><span style="width:32.58%;--fill:var(--r2)" title="Independent: 1,111"></span><span style="width:13.23%;--fill:var(--r3)" title="Lutheran: 451"></span><span style="width:10.76%;--fill:var(--r4)" title="Evangelical: 367"></span><span style="width:10.32%;--fill:var(--r5)" title="Baptist: 352"></span><span style="width:9.97%;--fill:var(--r6)" title="Alliance: 340"></span><span style="width:7.01%;--fill:var(--r7)" title="Pentecostal: 239"></span><span style="width:16.13%;--fill:var(--n5)" title="7 smaller denominations: 550"></span></div>
+<ul class="denom-list"><li><span>Independent</span><span class="n">1,111</span></li><li><span>Lutheran</span><span class="n">451</span></li><li><span>Evangelical</span><span class="n">367</span></li><li><span>Baptist</span><span class="n">352</span></li><li><span>Alliance</span><span class="n">340</span></li><li><span>Pentecostal</span><span class="n">239</span></li><li><span>Methodist</span><span class="n">151</span></li><li><span>Salvation Army</span><span class="n">151</span></li><li><span>Anglican</span><span class="n">134</span></li><li><span>Presbyterian</span><span class="n">50</span></li><li><span>Adventist</span><span class="n">39</span></li><li><span>Brethren</span><span class="n">23</span></li><li><span>Unstated</span><span class="n">2</span></li></ul>
+</div>
+</section>
+</div>
+<section class="schedule-wrap">
+<table class="schedule"><caption>17 purposes, ranked</caption><colgroup><col style="width:24px"><col><col style="width:68px"><col style="width:64px"></colgroup><thead><tr><th>#</th><th>Purpose 用途</th><th class="num">Count<span class="zh">數目</span></th><th class="num">Share<span class="zh">比例</span></th></tr></thead><tbody><tr class="sched-row"><td class="rank">01</td><td class="name">Religious · <span lang="zh-Hant">宗教</span></td><td class="count">4,621</td><td class="share">26.2%</td></tr><tr class="sched-row"><td class="rank">02</td><td class="name">Education · <span lang="zh-Hant">教育</span></td><td class="count">2,588</td><td class="share">14.7%</td></tr><tr class="sched-row"><td class="rank">03</td><td class="name">Foundation &amp; Trust · <span lang="zh-Hant">基金信託</span></td><td class="count">2,290</td><td class="share">13.0%</td></tr><tr class="sched-row"><td class="rank">04</td><td class="name">Social Welfare &amp; Services · <span lang="zh-Hant">社會福利服務</span></td><td class="count">2,030</td><td class="share">11.5%</td></tr><tr class="sched-row"><td class="rank">05</td><td class="name">Clubs &amp; Associations · <span lang="zh-Hant">會社協會</span></td><td class="count">1,448</td><td class="share">8.2%</td></tr><tr class="sched-row"><td class="rank">06</td><td class="name">Medical &amp; Health · <span lang="zh-Hant">醫療衞生</span></td><td class="count">1,290</td><td class="share">7.3%</td></tr><tr class="sched-row"><td class="rank">07</td><td class="name">Arts &amp; Culture · <span lang="zh-Hant">文化藝術</span></td><td class="count">738</td><td class="share">4.2%</td></tr><tr class="sched-row"><td class="rank">08</td><td class="name">Youth &amp; Children · <span lang="zh-Hant">青少年兒童</span></td><td class="count">680</td><td class="share">3.9%</td></tr><tr class="sched-row"><td class="rank">09</td><td class="name">Animals &amp; Environment · <span lang="zh-Hant">動物環保</span></td><td class="count">305</td><td class="share">1.7%</td></tr></tbody></table>
+<table class="schedule"><caption>17 purposes, ranked</caption><colgroup><col style="width:24px"><col><col style="width:68px"><col style="width:64px"></colgroup><thead><tr><th>#</th><th>Purpose 用途</th><th class="num">Count<span class="zh">數目</span></th><th class="num">Share<span class="zh">比例</span></th></tr></thead><tbody><tr class="sched-row"><td class="rank">10</td><td class="name">Community &amp; Kaifong · <span lang="zh-Hant">社區街坊</span></td><td class="count">292</td><td class="share">1.7%</td></tr><tr class="sched-row"><td class="rank">11</td><td class="name">Women · <span lang="zh-Hant">婦女</span></td><td class="count">282</td><td class="share">1.6%</td></tr><tr class="sched-row"><td class="rank">12</td><td class="name">Disability &amp; Rehab · <span lang="zh-Hant">復康傷健</span></td><td class="count">265</td><td class="share">1.5%</td></tr><tr class="sched-row"><td class="rank">13</td><td class="name">Elderly · <span lang="zh-Hant">長者</span></td><td class="count">198</td><td class="share">1.1%</td></tr><tr class="sched-row"><td class="rank">14</td><td class="name">Other / Uncategorised · <span lang="zh-Hant">其他</span></td><td class="count">179</td><td class="share">1.0%</td></tr><tr class="sched-row"><td class="rank">15</td><td class="name">Professional &amp; Business · <span lang="zh-Hant">專業商會</span></td><td class="count">173</td><td class="share">1.0%</td></tr><tr class="sched-row"><td class="rank">16</td><td class="name">Sports &amp; Recreation · <span lang="zh-Hant">體育康樂</span></td><td class="count">151</td><td class="share">0.9%</td></tr><tr class="sched-row"><td class="rank">17</td><td class="name">Clan &amp; Native-place · <span lang="zh-Hant">宗親同鄉</span></td><td class="count">93</td><td class="share">0.5%</td></tr></tbody></table>
+</section>
+<footer class="foot">
+<div>
+<div class="source-line">Source · IRD s88list.csv · as at 30 September 2026 · 17,623 entries · 資料來源：稅務局 s88list.csv，截至2026年9月30日，共17,623間機構</div>
+<p class="note">Band height = number of societies. Stage 2 shows the religious branch only. Purposes are machine-assigned by keyword rules with an LLM tie-break; faith and community labels are inferred from organisation names. Treat every classification as a lead, not a finding.</p>
+<p class="note" lang="zh-Hant">色帶高度即社團數目；第二層僅繪宗教一支。用途由關鍵詞規則及語言模型自動分類，信仰與社群標籤由機構名稱推斷，只宜視作線索。</p>
+</div>
+<div class="imprint">Curious Gold · Plate 05</div>
+</footer>
+</main>
+</body>
+</html>
