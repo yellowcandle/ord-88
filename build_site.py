@@ -33,6 +33,7 @@ RELIGIONS = {
     "HIN": ("Hindu", "印度教"),
     "SIK": ("Sikh", "錫克教"),
     "JEW": ("Jewish", "猶太教"),
+    "BAHAI": ("Bahá'í", "巴哈伊"),
     "OTH": ("Other / unclear", "其他／不明"),
 }
 
@@ -102,6 +103,7 @@ def share(count: int, total: int) -> float:
 def aggregate(root: pathlib.Path) -> dict:
     as_at, as_at_zh = read_register_date(root / "s88list.csv")
     categories = read_counts(root / "s88list_categorised.csv", "category")
+    codes = read_counts(root / "s88list_categorised.csv", "code")
     total = sum(categories.values())
     purposes = []
     for label, count in categories.most_common():
@@ -127,8 +129,11 @@ def aggregate(root: pathlib.Path) -> dict:
     with (root / "sub_religion.csv").open(encoding="utf-8-sig", newline="") as handle:
         for row in csv.DictReader(handle):
             code, _, detail = row["result"].partition("/")
-            religion_counts[code.upper()] += 1
-            if code.upper() == "PROT":
+            code = code.upper()
+            if code not in RELIGIONS:
+                code = "OTH"
+            religion_counts[code] += 1
+            if code == "PROT":
                 denominations[detail if detail not in ("", "-") else "Unstated"] += 1
 
     religious_total = sum(religion_counts.values())
@@ -164,16 +169,19 @@ def aggregate(root: pathlib.Path) -> dict:
         en, zh = COMMUNITY.get(key, (key.title(), ""))
         community.append({"en": en, "zh": zh, "count": count, "share": share(count, community_total)})
 
+    religious_band = codes.get("REL", 0)
     return {
         "total": total,
         "as_at": as_at,
         "as_at_zh": as_at_zh,
-        "religious_band": purposes[0]["count"],
+        "religious_band": religious_band,
         "religious_total": religious_total,
+        "religious_unclassified": max(0, religious_band - religious_total),
         "tradition_count": len(religion_counts),
         "denomination_count": len(denomination_rows),
         "denomination_total": protestant_total,
         "community_total": community_total,
+        "community_unclassified": max(0, codes.get("COM", 0) - community_total),
         "purposes": purposes,
         "stage1": stage1,
         "traditions": stage2,
@@ -190,7 +198,8 @@ CSS = """
 --display:"Bricolage Grotesque",Georgia,serif;--body:"DM Sans",-apple-system,"PingFang HK","Noto Sans TC",sans-serif;
 --mono:"Geist Mono",ui-monospace,monospace}
 *{box-sizing:border-box}
-body{margin:0;background:#fff;color:var(--ink);font-family:var(--body);font-size:12px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:12px}
+::selection{background:var(--ink);color:var(--bg)}
 .plate{width:1600px;margin:0 auto;padding:32px 56px 24px}
 a{color:inherit}
 .plate-head{display:grid;grid-template-columns:1fr auto;align-items:start;gap:24px}
@@ -202,7 +211,7 @@ a{color:inherit}
 .hero{font-family:var(--display);font-size:92px;font-weight:500;line-height:1;letter-spacing:-.02em}
 .deck{color:var(--ink2);line-height:1.55;font-size:12px;margin:0}
 .deck.zh{line-height:1.75;font-family:var(--body)}
-.caption{font-family:var(--mono);font-size:11px;color:var(--ink2);margin:0 0 12px}
+.caption{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--ink2);margin:0 0 12px}
 .charts{display:grid;grid-template-columns:1fr 464px;gap:80px;align-items:start}
 .stage1-chart{display:grid;grid-template-columns:8px 240px 1fr 64px 56px;column-gap:8px}
 .source{background:var(--ink);grid-row:1 / span 7}
@@ -220,15 +229,16 @@ a{color:inherit}
 .trad-bands{position:relative;height:300px}
 .trad-band{position:absolute;left:0;width:150px;background:var(--fill);height:var(--trad-h);box-shadow:inset 0 0 0 1px rgba(23,23,26,.16)}
 .trad-labels{position:relative}
-.trad-label{position:absolute;left:0;display:flex;align-items:center;gap:8px;white-space:nowrap}
-.trad-label .swatch{width:8px;height:8px;background:var(--fill);flex:none}
+.trad-label{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.trad-label .swatch{width:8px;height:8px;background:var(--fill);flex:none;box-shadow:inset 0 0 0 1px rgba(23,23,26,.16)}
 .trad-label .name{font-size:12px}
-.trad-label .n{font-family:var(--mono);font-size:12px;color:var(--ink)}
-.trad-label .n{margin-left:auto}
-.trad-label.lead{display:block;left:0;top:88px;white-space:normal}
+.trad-label .n{font-family:var(--mono);font-size:12px;color:var(--ink);margin-left:auto}
+.trad-label.lead{position:absolute;left:0;display:block;white-space:normal;transform:translateY(-50%)}
 .trad-label.lead .name{font-size:13.5px;font-weight:500;display:block}
-.trad-label.lead .sub{font-size:11px;color:var(--ink2);display:block;margin-top:8px}
-.trad-legend-head{position:absolute;left:0;top:176px;font-family:var(--mono);font-size:11px;color:var(--ink2)}
+.trad-label.lead .sub{font-size:11px;color:var(--ink2);display:block;margin-top:2px}
+.trad-legend{position:absolute;left:0;width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.trad-legend .trad-label{width:100%}
+.trad-legend-head{font-family:var(--mono);font-size:11px;color:var(--ink2);margin-bottom:2px}
 .trad-note{font-size:12px;color:var(--ink2);margin:8px 0 0;line-height:1.5}
 .stage3{margin-top:22px;border-top:1px solid var(--ink);padding-top:12px}
 .denom-strip{display:flex;height:24px;margin:6px 0 12px}
@@ -283,28 +293,40 @@ def render(data: dict) -> str:
             )
         return "".join(rows)
 
+    def trad_offsets() -> list[int]:
+        tops, top = [], 0
+        for row in data["traditions"]:
+            tops.append(top)
+            top += row["height"]
+        return tops
+
     def trad_bands() -> str:
         return "".join(
-            f'<div class="trad-band" style="--trad-h:{row["height"]}px;--fill:var(--{fill})"></div>'
-            for row, fill in zip(data["traditions"], TRADITION_FILLS)
+            f'<div class="trad-band" style="top:{top}px;--trad-h:{row["height"]}px;--fill:var(--{fill})"></div>'
+            for row, top, fill in zip(data["traditions"], trad_offsets(), TRADITION_FILLS)
         )
 
     def trad_labels() -> str:
         fills = TRADITION_FILLS
+        tops = trad_offsets()
         lead, rest = data["traditions"][0], data["traditions"][1:]
         out = [
-            f'<div class="trad-label lead" style="--fill:var(--{fills[0]})">'
+            f'<div class="trad-label lead" style="top:{tops[0] + lead["height"] // 2}px;--fill:var(--{fills[0]})">'
             f'<span class="name">{escape(lead["en"])}</span>'
             f'<span class="sub" lang="zh-Hant">{escape(lead["zh"])} · {fmt(lead["count"])}</span></div>'
         ]
+        out.append(
+            f'<div class="trad-legend" style="top:{tops[0] + lead["height"] + 12}px">'
+            '<div class="trad-legend-head">Other traditions · 其餘傳統</div>'
+        )
         for index, row in enumerate(rest):
-            top = 224 + index * 20
             out.append(
-                f'<div class="trad-label" style="top:{top}px;--fill:var(--{fills[index + 1]})">'
+                f'<div class="trad-label" style="--fill:var(--{fills[index + 1]})">'
                 f'<span class="swatch"></span><span class="name">{escape(row["en"])} · '
                 f'<span lang="zh-Hant">{escape(row["zh"])}</span></span>'
                 f'<span class="n">{fmt(row["count"])}</span></div>'
             )
+        out.append("</div>")
         return "".join(out)
 
     def denom_strip() -> str:
@@ -340,13 +362,33 @@ def render(data: dict) -> str:
         return (
             f'<table class="schedule"><caption>{total_rows} purposes, ranked</caption>'
             '<colgroup><col style="width:24px"><col><col style="width:68px"><col style="width:64px"></colgroup>'
-            '<thead><tr><th>#</th><th>Purpose 用途</th>'
-            '<th class="num">Count<span class="zh">數目</span></th>'
-            '<th class="num">Share<span class="zh">比例</span></th></tr></thead>'
+            '<thead><tr><th scope="col"><span aria-hidden="true">#</span><span class="sr-only">Rank</span></th><th scope="col">Purpose 用途</th>'
+            '<th class="num" scope="col">Count<span class="zh">數目</span></th>'
+            '<th class="num" scope="col">Share<span class="zh">比例</span></th></tr></thead>'
             f"<tbody>{body}</tbody></table>"
         )
 
     purposes = data["purposes"]
+    band = fmt(data["religious_band"])
+    if data["religious_unclassified"]:
+        en_relig = (
+            f"Of the {band} religious societies, {fmt(data['religious_total'])} carry a faith "
+            f"classification; those resolve again into {data['tradition_count']} traditions and "
+            f"{data['denomination_count']} Protestant groupings."
+        )
+        zh_relig = (
+            f"{band} 間宗教社團中，{fmt(data['religious_total'])} 間有信仰分類，"
+            f"再分為 {data['tradition_count']} 個傳統，其中基督新教再分為 {data['denomination_count']} 個教派。"
+        )
+    else:
+        en_relig = (
+            f"Those {band} religious societies resolve again into {data['tradition_count']} "
+            f"traditions and {data['denomination_count']} Protestant groupings."
+        )
+        zh_relig = (
+            f"其中{band}間宗教社團，再分為 {data['tradition_count']} 個傳統，"
+            f"其中基督新教再分為 {data['denomination_count']} 個教派。"
+        )
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -364,32 +406,34 @@ def render(data: dict) -> str:
 <hr class="rule">
 <section class="statement">
 <div class="hero">{fmt(data["total"])}</div>
-<p class="deck">Every society on the register resolves into one of {len(data["purposes"])} purposes. Of the {fmt(data["religious_band"])} religious societies, {fmt(data["religious_total"])} carry a faith classification; those resolve again into {data["tradition_count"]} traditions and {data["denomination_count"]} Protestant groupings. Band height is the number of societies — never a share of a share.</p>
-<p class="deck zh" lang="zh-Hant">登記冊上的每一間社團，最終都歸入 {len(data["purposes"])} 個用途之一。{fmt(data["religious_band"])} 間宗教社團中，{fmt(data["religious_total"])} 間有信仰分類，再分為 {data["tradition_count"]} 個傳統，其中基督新教再分為 {data["denomination_count"]} 個教派。色帶的高度就是社團數目，不是比例。</p>
+<p class="deck">Every society on the register resolves into one of {len(data["purposes"])} purposes. {en_relig} Band height is the number of societies — never a share of a share.</p>
+<p class="deck zh" lang="zh-Hant">登記冊上的每一間社團，最終都歸入 {len(data["purposes"])} 個用途之一。{zh_relig}色帶的高度就是社團數目，不是比例。</p>
 </section>
 <div class="charts">
-<section>
-<p class="caption">Stage 1 · Purposes · 用途</p>
+<section aria-labelledby="cap-stage1">
+<h2 class="caption" id="cap-stage1">Stage 1 · Purposes · 用途</h2>
 <div class="stage1-chart" aria-hidden="true">
 <div class="source"></div>
 {band_rows()}
 </div>
 </section>
-<section>
-<p class="caption">Stage 2 · Traditions · 信仰傳統</p>
+<div class="stage-col">
+<section aria-labelledby="cap-stage2">
+<h2 class="caption" id="cap-stage2">Stage 2 · Traditions within {fmt(data["religious_total"])} · 信仰傳統</h2>
 <div class="trad-chart" aria-hidden="true">
 <div class="trad-source"></div>
 <div class="trad-bands">{trad_bands()}</div>
-<div class="trad-labels">{trad_labels()}<div class="trad-legend-head">Other traditions · 其餘傳統</div></div>
+<div class="trad-labels">{trad_labels()}</div>
 </div>
 <ul class="sr-only">{"".join(f"<li>{escape(row['en'])}: {fmt(row['count'])}</li>" for row in data["stage2_full"])}</ul>
 <p class="trad-note">{data["traditions"][0]["en"]} holds {data["traditions"][0]["share"]:.1f}% of the {fmt(data["religious_total"])} classified religious societies — and {data["traditions"][0]["count"] / data["total"] * 100:.1f}% of the register.</p>
-<div class="stage3">
-<p class="caption">Stage 3 · {data["denomination_count"]} Protestant groupings within {fmt(data["denomination_total"])} · 基督新教分組</p>
+</section>
+<section class="stage3" aria-labelledby="cap-stage3">
+<h2 class="caption" id="cap-stage3">Stage 3 · {data["denomination_count"]} Protestant groupings within {fmt(data["denomination_total"])} · 基督新教分組</h2>
 <div class="denom-strip" aria-hidden="true">{denom_strip()}</div>
 <ul class="denom-list">{denom_rows()}</ul>
-</div>
 </section>
+</div>
 </div>
 <section class="schedule-wrap">
 {schedule(purposes[:9], 1, len(purposes))}
@@ -412,6 +456,18 @@ def render(data: dict) -> str:
 def main() -> None:
     root = pathlib.Path(__file__).resolve().parent
     data = aggregate(root)
+    if data["religious_unclassified"]:
+        print(
+            f"WARNING: {data['religious_unclassified']} religious societies have no faith label — "
+            "regenerate sub_religion.csv with `classify_sub.py religion`",
+            file=sys.stderr,
+        )
+    if data["community_unclassified"]:
+        print(
+            f"WARNING: {data['community_unclassified']} community societies have no community label — "
+            "regenerate sub_community.csv with `classify_sub.py community`",
+            file=sys.stderr,
+        )
     out = root / "dist"
     out.mkdir(exist_ok=True)
     (out / "data.json").write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")

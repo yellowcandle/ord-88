@@ -9,36 +9,36 @@ character are **inferred from organisation names** and are indicative, not autho
 
 | Category | Count | % | Examples |
 |---|---:|---:|---|
-| Protestant Christian 基督新教 | 3,410 | 74.4% | 基督教418路社區教會有限公司 · 611靈糧堂有限公司 · 611靈糧堂有限公司 |
-| Buddhism 佛教 | 484 | 10.6% | 圓通精舍有限公司 · 中國佛教學會有限公司 · 香港淨宗學會有限公司 |
-| Roman Catholic 天主教 | 362 | 7.9% | Abbot in Hong Kong of  · Abbot in Hong Kong of  · Apostolic Catholic Chu |
-| Taoism 道教 | 135 | 2.9% | 天教六壬良園舘有限公司 · 至和壇有限公司 · 正德道德堂有限公司 |
-| Chinese folk religion 民間信仰 | 70 | 1.5% | 小西灣南海觀音廟管理委員會 · 香港仔譚公爺廟有限公司 · 福德老爺古廟有限公司 |
-| Other Christian 其他基督宗教 | 52 | 1.1% | 耶穌基督後期聖徒教會香港有限公司 · 耶穌基督後期聖徒教會香港有限公司 · 耶穌基督後期聖徒教會香港有限公司 |
-| Islam 伊斯蘭教 | 42 | 0.9% | Ahmadiyya Muslim Jamat · (中華回教博愛社) · (中華回教博愛社) |
-| Hindu 印度教 | 8 | 0.2% | Bhaktivedanta Books Li · Bochasanwasi Shri Aksh · Hindu Swayamsevak Sang |
-| Unclear / other 不明 | 8 | 0.2% | Incorporated Trustees  · 香港新興教派研究中心有限公司 · 香港神慈秀明會有限公司 |
-| Jewish 猶太教 | 4 | 0.1% | Chabad Lubavitch Jewis · Kehilat Zion Synagogue · United Israel Appeal ( |
+| Protestant Christian 基督新教 | 3,417 | 73.9% | 基督教418路社區教會有限公司 · 611靈糧堂有限公司 · 611靈糧堂有限公司 |
+| Buddhism 佛教 | 479 | 10.4% | 中華彌勒文化慈善基金會有限公司 · 正念‧慈愛慈善基金有限公司 · 圓通精舍有限公司 |
+| Roman Catholic 天主教 | 371 | 8.0% | Abbot in Hong Kong of  · Abbot in Hong Kong of  · Apostolic Catholic Chu |
+| Taoism 道教 | 117 | 2.5% | 天教六壬良園舘有限公司 · 至和壇有限公司 · 正德道德堂有限公司 |
+| Chinese folk religion 民間信仰 | 107 | 2.3% | 小西灣南海觀音廟管理委員會 · 觀塘潮僑工商界盂蘭勝會慈善基金有限公司 · 香港仔譚公爺廟有限公司 |
+| Other Christian 其他基督宗教 | 53 | 1.1% | Aglow International Ho · 教會聚會所(基督徒管家) · 教會聚會所(基督徒管家)生命樹教育中心有限公 |
+| Islam 伊斯蘭教 | 40 | 0.9% | Ahmadiyya Muslim Jamat · (中華回教博愛社) · (中華回教博愛社) |
+| Unclear / other 不明 | 18 | 0.4% | 覺醒心靈成長中心有限公司 · 宣德(國際)有限公司 · 流堂有限公司 |
+| Hindu 印度教 | 9 | 0.2% | Art of Living Society  · Bhaktivedanta Books Li · Bochasanwasi Shri Aksh |
 | Sikh 錫克教 | 4 | 0.1% | Khalsa Diwan, Hong Kon · Khalsa Diwan, Hong Kon · Singh Sabha (H.K) Limi |
+| Jewish 猶太教 | 3 | 0.1% | Chabad Lubavitch Jewis · Kehilat Zion Synagogue · United Jewish Congrega |
 | Confucianism 孔教 | 3 | 0.1% | 孔教學院 · (香港孔聖堂有限公司) · (香港孔聖堂有限公司) |
 
 ### Protestant denominations
 
 | Denomination | Count |
 |---|---:|
-| Independent | 1,111 |
-| Lutheran | 451 |
-| Evangelical | 367 |
-| Baptist | 352 |
-| Alliance | 340 |
-| Pentecostal | 239 |
-| Methodist | 151 |
+| Independent | 1,254 |
+| Baptist | 421 |
+| Lutheran | 413 |
+| Evangelical | 304 |
+| Alliance | 295 |
+| Pentecostal | 195 |
 | Salvation-Army | 151 |
-| Anglican | 134 |
-| Presbyterian | 50 |
+| Methodist | 127 |
+| Anglican | 117 |
+| Presbyterian | 69 |
 | Adventist | 39 |
-| Brethren | 23 |
-| - | 2 |
+| Unstated | 27 |
+| Brethren | 5 |
 
 ## Community groups by inferred socio-political character
 
@@ -46,14 +46,14 @@ character are **inferred from organisation names** and are indicative, not autho
 
 | Category | Count | % | Examples |
 |---|---:|---:|---|
-| General mutual-aid 互助服務 | 86 | 33.9% | 恒有餘力互助會 · 堅離地同樂會慈善基金有限公司 · 同社 |
-| Kaifong welfare 街坊福利 | 71 | 28.0% | 石湖新村(河北段)街坊會 · 香港仔街坊福利會有限公司 · 香港仔街坊福利會有限公司 |
-| Civil society / advocacy 公民社會 | 32 | 12.6% | 香港中西區關愛服務及社區發展基金有限公司 · 全港社區發展連線有限公司 · 社區盟有限公司 |
-| Unclear 不明 | 22 | 8.7% | 安迪潘瑜伽聯盟有限公司 · 大銀力量有限公司 · 香村創意有限公司 |
-| Rural / indigenous 鄉事原居民 | 18 | 7.1% | 長洲鄉事委員會 · 厦村鄉鄉事委員會 · 養和山村義工隊有限公司 |
-| Owners / residents 業主居民 | 17 | 6.7% | 彩牛居民力量 · 晴雲樓互助委員會 · 東九龍居民委員會有限公司 |
-| Patriotic / pro-establishment-named 愛國建制 | 7 | 2.8% | 建設健康九龍城協會有限公司 · 富泰同心協會 · 香港南區各界聯會有限公司 |
-| Native-place 同鄉 | 1 | 0.4% | 香港仔田灣邨華富邨華貴邨潮僑坊眾盂蘭勝會有限 |
+| General mutual-aid 互助服務 | 84 | 28.8% | 恒有餘力互助會 · 愛傳城中心有限公司 · 利眾社有限公司 |
+| Kaifong welfare 街坊福利 | 72 | 24.7% | 石湖新村(河北段)街坊會 · 香港仔街坊福利會有限公司 · 香港仔街坊福利會有限公司 |
+| Civil society / advocacy 公民社會 | 48 | 16.4% | 彩牛居民力量 · 堅離地同樂會慈善基金有限公司 · 全港社區發展連線有限公司 |
+| Patriotic / pro-establishment-named 愛國建制 | 25 | 8.6% | 香港中西區關愛服務及社區發展基金有限公司 · 博愛醫院歷屆總理聯誼會有限公司 · 博愛醫院歷屆總理聯誼會有限公司 |
+| Unclear 不明 | 24 | 8.2% | 安迪潘瑜伽聯盟有限公司 · 護手社 · Beacon Harbour Limited |
+| Owners / residents 業主居民 | 17 | 5.8% | 中西區半山業主聯會(環保回收)有限公司 · 晴雲樓互助委員會 · 社區共融天盛協會有限公司 |
+| Rural / indigenous 鄉事原居民 | 15 | 5.1% | 長洲鄉事委員會 · 山中小市有限公司 · 厦村鄉鄉事委員會 |
+| Native-place 同鄉 | 7 | 2.4% | 香港仔田灣邨華富邨華貴邨潮僑坊眾盂蘭勝會有限 · Connecting Myanmar Lim · 印度之友 |
 
 > **Caveat:** affiliation is inferred from naming patterns (e.g. 鄉事委員會 → rural-indigenous,
 > 街坊福利會 → kaifong-grassroots, 各界聯會/社團聯會 → pro-establishment umbrella). It is a lean for

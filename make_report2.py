@@ -22,8 +22,8 @@ for r in relrows:
     relig[code]+=1
     if len(relex[code])<4: relex[code].append((r["chinese_name"] or r["english_name"])[:22])
     if code=="PROT":
-        d=r["result"].split("/",1)[1] if "/" in r["result"] else "-"
-        denom[d.strip() or "-"]+=1
+        d=r["result"].split("/",1)[1].strip() if "/" in r["result"] else ""
+        denom[d if d not in ("","-") else "Unstated"]+=1
 
 # ---------- community ----------
 comrows=list(csv.DictReader(open("sub_community.csv",encoding="utf-8-sig")))

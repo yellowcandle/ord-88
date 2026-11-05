@@ -34,6 +34,14 @@ Do's and Don'ts: (details included in section 6)
 
 ---
 
+> **Status (2026-11-05):** this file is the design brief for the planned *Interactive
+> Charity Explorer*. The artefact currently shipped from this repo is a static
+> print-style plate — [`build_site.py`](build_site.py) → `dist/index.html` — which uses
+> its own near-neutral palette (browns and greys, Bricolage Grotesque / DM Sans /
+> Geist Mono) rather than the amber/indigo OKLCH system specified below. Do not treat
+> the tokens in this document as a description of the shipped page; see
+> [`build_site.py`](build_site.py) for the real one. `webui.pen` matches the shipped plate.
+
 ## 1. Overview
 **North Star:** *The Curious‑Gold Portal* – a warm amber‑gilded entrance inviting explorers to uncover hidden social tapestries behind charitable societies.  
 The explorer clicks a charity name, flips across category, religion, community and social‑welfare tags, toggles “show origins”, and receives the same data on a clean card. The whole surface breathes with a faint golden‑hour light (indigo accent glows on hover) – the vibe is optimistic, data‑curious and gently mysterious rather than a cold dashboard.  

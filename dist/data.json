@@ -3,11 +3,13 @@
   "as_at": "30 September 2026",
   "as_at_zh": "2026年9月30日",
   "religious_band": 4621,
-  "religious_total": 4582,
+  "religious_total": 4621,
+  "religious_unclassified": 0,
   "tradition_count": 12,
   "denomination_count": 13,
-  "denomination_total": 3410,
-  "community_total": 254,
+  "denomination_total": 3417,
+  "community_total": 292,
+  "community_unclassified": 0,
   "purposes": [
     {
       "en": "Religious",
@@ -167,36 +169,36 @@
     {
       "en": "Protestant Christian",
       "zh": "基督新教",
-      "count": 3410,
-      "share": 74.4,
+      "count": 3417,
+      "share": 73.9,
       "height": 200
     },
     {
       "en": "Buddhism",
       "zh": "佛教",
-      "count": 484,
-      "share": 10.6,
+      "count": 479,
+      "share": 10.4,
       "height": 36
     },
     {
       "en": "Roman Catholic",
       "zh": "天主教",
-      "count": 362,
-      "share": 7.9,
+      "count": 371,
+      "share": 8.0,
       "height": 28
     },
     {
       "en": "Taoism",
       "zh": "道教",
-      "count": 135,
-      "share": 2.9,
+      "count": 117,
+      "share": 2.5,
       "height": 16
     },
     {
       "en": "8 other traditions",
       "zh": "其餘8個傳統",
-      "count": 191,
-      "share": 4.2,
+      "count": 237,
+      "share": 5.1,
       "height": 20
     }
   ],
@@ -204,67 +206,67 @@
     {
       "en": "Protestant Christian",
       "zh": "基督新教",
-      "count": 3410,
-      "share": 74.4
+      "count": 3417,
+      "share": 73.9
     },
     {
       "en": "Buddhism",
       "zh": "佛教",
-      "count": 484,
-      "share": 10.6
+      "count": 479,
+      "share": 10.4
     },
     {
       "en": "Roman Catholic",
       "zh": "天主教",
-      "count": 362,
-      "share": 7.9
+      "count": 371,
+      "share": 8.0
     },
     {
       "en": "Taoism",
       "zh": "道教",
-      "count": 135,
-      "share": 2.9
+      "count": 117,
+      "share": 2.5
     },
     {
       "en": "Chinese folk religion",
       "zh": "民間信仰",
-      "count": 70,
-      "share": 1.5
+      "count": 107,
+      "share": 2.3
     },
     {
       "en": "Other Christian",
       "zh": "其他基督宗教",
-      "count": 52,
+      "count": 53,
       "share": 1.1
     },
     {
       "en": "Islam",
       "zh": "伊斯蘭教",
-      "count": 42,
+      "count": 40,
       "share": 0.9
-    },
-    {
-      "en": "Hindu",
-      "zh": "印度教",
-      "count": 8,
-      "share": 0.2
     },
     {
       "en": "Other / unclear",
       "zh": "其他／不明",
-      "count": 8,
-      "share": 0.2
+      "count": 18,
+      "share": 0.4
     },
     {
-      "en": "Jewish",
-      "zh": "猶太教",
-      "count": 4,
-      "share": 0.1
+      "en": "Hindu",
+      "zh": "印度教",
+      "count": 9,
+      "share": 0.2
     },
     {
       "en": "Sikh",
       "zh": "錫克教",
       "count": 4,
+      "share": 0.1
+    },
+    {
+      "en": "Jewish",
+      "zh": "猶太教",
+      "count": 3,
       "share": 0.1
     },
     {
@@ -277,38 +279,33 @@
   "denominations": [
     {
       "en": "Independent",
-      "count": 1111,
-      "share": 32.6
-    },
-    {
-      "en": "Lutheran",
-      "count": 451,
-      "share": 13.2
-    },
-    {
-      "en": "Evangelical",
-      "count": 367,
-      "share": 10.8
+      "count": 1254,
+      "share": 36.7
     },
     {
       "en": "Baptist",
-      "count": 352,
-      "share": 10.3
+      "count": 421,
+      "share": 12.3
+    },
+    {
+      "en": "Lutheran",
+      "count": 413,
+      "share": 12.1
+    },
+    {
+      "en": "Evangelical",
+      "count": 304,
+      "share": 8.9
     },
     {
       "en": "Alliance",
-      "count": 340,
-      "share": 10.0
+      "count": 295,
+      "share": 8.6
     },
     {
       "en": "Pentecostal",
-      "count": 239,
-      "share": 7.0
-    },
-    {
-      "en": "Methodist",
-      "count": 151,
-      "share": 4.4
+      "count": 195,
+      "share": 5.7
     },
     {
       "en": "Salvation Army",
@@ -316,14 +313,19 @@
       "share": 4.4
     },
     {
+      "en": "Methodist",
+      "count": 127,
+      "share": 3.7
+    },
+    {
       "en": "Anglican",
-      "count": 134,
-      "share": 3.9
+      "count": 117,
+      "share": 3.4
     },
     {
       "en": "Presbyterian",
-      "count": 50,
-      "share": 1.5
+      "count": 69,
+      "share": 2.0
     },
     {
       "en": "Adventist",
@@ -331,13 +333,13 @@
       "share": 1.1
     },
     {
-      "en": "Brethren",
-      "count": 23,
-      "share": 0.7
+      "en": "Unstated",
+      "count": 27,
+      "share": 0.8
     },
     {
-      "en": "Unstated",
-      "count": 2,
+      "en": "Brethren",
+      "count": 5,
       "share": 0.1
     }
   ],
@@ -345,50 +347,50 @@
     {
       "en": "Mutual aid",
       "zh": "互助服務",
-      "count": 86,
-      "share": 33.9
+      "count": 84,
+      "share": 28.8
     },
     {
       "en": "Kaifong welfare",
       "zh": "街坊福利",
-      "count": 71,
-      "share": 28.0
+      "count": 72,
+      "share": 24.7
     },
     {
       "en": "Civil society",
       "zh": "公民社會",
-      "count": 32,
-      "share": 12.6
+      "count": 48,
+      "share": 16.4
+    },
+    {
+      "en": "Patriotic-named",
+      "zh": "愛國建制",
+      "count": 25,
+      "share": 8.6
     },
     {
       "en": "Unclear",
       "zh": "不明",
-      "count": 22,
-      "share": 8.7
-    },
-    {
-      "en": "Rural / indigenous",
-      "zh": "鄉事原居民",
-      "count": 18,
-      "share": 7.1
+      "count": 24,
+      "share": 8.2
     },
     {
       "en": "Owners / residents",
       "zh": "業主居民",
       "count": 17,
-      "share": 6.7
+      "share": 5.8
     },
     {
-      "en": "Patriotic-named",
-      "zh": "愛國建制",
-      "count": 7,
-      "share": 2.8
+      "en": "Rural / indigenous",
+      "zh": "鄉事原居民",
+      "count": 15,
+      "share": 5.1
     },
     {
       "en": "Native-place",
       "zh": "同鄉",
-      "count": 1,
-      "share": 0.4
+      "count": 7,
+      "share": 2.4
     }
   ]
 }

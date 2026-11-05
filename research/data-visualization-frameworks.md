@@ -2,6 +2,12 @@
 
 *2026-11-03 · scope: the Interactive Charity Explorer in `DESIGN.md` — 17,591 HK Section-88 charities, bilingual EN/繁中, amber/indigo OKLCH design system, static hosting assumed.*
 
+> **Provenance note (2026-11-05):** every figure below was measured against the
+> **2026-04-30** register snapshot (17,591 entries) and the categorisation current at
+> that time. The register has since been refreshed to **30 September 2026** (17,623
+> entries) and the sub-classification re-run; the framework comparison, bundle sizes
+> and recommendation are unaffected by that data change.
+
 ## Verdict
 
 Aggregate in Python at build time, render client-side, and pick the chart library by how much interaction the explorer actually needs:
