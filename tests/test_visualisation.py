@@ -394,6 +394,7 @@ class RescuePipelineTest(unittest.TestCase):
         )
         self.addCleanup(error.close)
         with (
+            mock.patch.object(classify_sub, "api_key", return_value="test"),
             mock.patch.object(classify_sub.urllib.request, "urlopen", side_effect=error),
             mock.patch.object(classify_sub.time, "sleep") as sleep,
         ):
