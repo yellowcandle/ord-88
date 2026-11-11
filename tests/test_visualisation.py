@@ -252,11 +252,16 @@ class ProvenanceTest(unittest.TestCase):
                 mock.patch.object(provenance, "sha256", return_value="a"),
             ):
                 provenance.write_meta(
-                    model="main-model", prompt_version="m1", fallback_rows=2,
-                    stage="main", source_changed=True,
+                    model="main-model",
+                    prompt_version="m1",
+                    fallback_rows=2,
+                    stage="main",
+                    source_changed=True,
                 )
                 provenance.write_meta(
-                    model="sub-model", prompt_version="s1", fallback_rows=0,
+                    model="sub-model",
+                    prompt_version="s1",
+                    fallback_rows=0,
                     stage="religion",
                 )
                 stored = json.loads(meta.read_text(encoding="utf-8"))
@@ -295,7 +300,9 @@ class BuildGuardTest(unittest.TestCase):
     def test_stale_source_refuses_to_build(self):
         with (
             mock.patch.object(build_site, "check_source", side_effect=SystemExit("changed")),
-            mock.patch.object(build_site, "aggregate", side_effect=AssertionError("must not aggregate")),
+            mock.patch.object(
+                build_site, "aggregate", side_effect=AssertionError("must not aggregate")
+            ),
             redirect_stderr(io.StringIO()),
         ):
             self.assertEqual(build_site.main([]), 2)
