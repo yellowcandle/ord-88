@@ -7,7 +7,7 @@ os.environ.setdefault("MPLBACKEND", "Agg")
 import csv
 import datetime
 import json
-from collections import Counter, defaultdict
+from collections import defaultdict
 
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
@@ -70,6 +70,6 @@ L=["# Hong Kong Section-88 Tax-Exempt Charities — Categorisation",
 for i,k in enumerate(order,1):
     L.append(f"| {i} | {LABEL[k]} | {counts[k]:,} | {100*counts[k]/total:.1f}% | "
              + " · ".join(ex[k][:3]) + " |")
-L+=["",f"**Outputs:** `s88list_categorised.csv` (per-org labels), `category_counts.json`, `s88_categories.png`"]
+L+=["","**Outputs:** `s88list_categorised.csv` (per-org labels), `category_counts.json`, `s88_categories.png`"]
 open("s88_report.md","w").write("\n".join(L))
 print("wrote s88_report.md")

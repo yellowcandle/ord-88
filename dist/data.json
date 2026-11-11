@@ -2,43 +2,43 @@
   "total": 17623,
   "as_at": "30 September 2026",
   "as_at_zh": "2026年9月30日",
-  "religious_band": 4621,
-  "religious_total": 4621,
+  "religious_band": 4645,
+  "religious_total": 4645,
   "religious_unclassified": 0,
   "tradition_count": 12,
   "denomination_count": 13,
-  "denomination_total": 3417,
-  "community_total": 292,
+  "denomination_total": 3436,
+  "community_total": 318,
   "community_unclassified": 0,
   "purposes": [
     {
       "en": "Religious",
       "zh": "宗教",
-      "count": 4621,
-      "share": 26.2
+      "count": 4645,
+      "share": 26.4
     },
     {
       "en": "Education",
       "zh": "教育",
-      "count": 2588,
+      "count": 2598,
       "share": 14.7
     },
     {
       "en": "Foundation & Trust",
       "zh": "基金信託",
-      "count": 2290,
+      "count": 2292,
       "share": 13.0
     },
     {
       "en": "Social Welfare & Services",
       "zh": "社會福利服務",
-      "count": 2030,
-      "share": 11.5
+      "count": 2041,
+      "share": 11.6
     },
     {
       "en": "Clubs & Associations",
       "zh": "會社協會",
-      "count": 1448,
+      "count": 1450,
       "share": 8.2
     },
     {
@@ -56,19 +56,19 @@
     {
       "en": "Youth & Children",
       "zh": "青少年兒童",
-      "count": 680,
+      "count": 686,
       "share": 3.9
-    },
-    {
-      "en": "Animals & Environment",
-      "zh": "動物環保",
-      "count": 305,
-      "share": 1.7
     },
     {
       "en": "Community & Kaifong",
       "zh": "社區街坊",
-      "count": 292,
+      "count": 318,
+      "share": 1.8
+    },
+    {
+      "en": "Animals & Environment",
+      "zh": "動物環保",
+      "count": 307,
       "share": 1.7
     },
     {
@@ -86,14 +86,8 @@
     {
       "en": "Elderly",
       "zh": "長者",
-      "count": 198,
+      "count": 199,
       "share": 1.1
-    },
-    {
-      "en": "Other / Uncategorised",
-      "zh": "其他",
-      "count": 179,
-      "share": 1.0
     },
     {
       "en": "Professional & Business",
@@ -104,8 +98,14 @@
     {
       "en": "Sports & Recreation",
       "zh": "體育康樂",
-      "count": 151,
+      "count": 152,
       "share": 0.9
+    },
+    {
+      "en": "Other / Uncategorised",
+      "zh": "其他",
+      "count": 94,
+      "share": 0.5
     },
     {
       "en": "Clan & Native-place",
@@ -118,35 +118,35 @@
     {
       "en": "Religious",
       "zh": "宗教",
-      "count": 4621,
-      "share": 26.2,
+      "count": 4645,
+      "share": 26.4,
       "height": 140
     },
     {
       "en": "Education",
       "zh": "教育",
-      "count": 2588,
+      "count": 2598,
       "share": 14.7,
       "height": 84
     },
     {
       "en": "Foundation & Trust",
       "zh": "基金信託",
-      "count": 2290,
+      "count": 2292,
       "share": 13.0,
       "height": 72
     },
     {
       "en": "Social Welfare & Services",
       "zh": "社會福利服務",
-      "count": 2030,
-      "share": 11.5,
+      "count": 2041,
+      "share": 11.6,
       "height": 68
     },
     {
       "en": "Clubs & Associations",
       "zh": "會社協會",
-      "count": 1448,
+      "count": 1450,
       "share": 8.2,
       "height": 48
     },
@@ -160,8 +160,8 @@
     {
       "en": "11 further purposes",
       "zh": "其餘11項用途",
-      "count": 3356,
-      "share": 19.0,
+      "count": 3307,
+      "share": 18.8,
       "height": 104
     }
   ],
@@ -169,28 +169,28 @@
     {
       "en": "Protestant Christian",
       "zh": "基督新教",
-      "count": 3417,
-      "share": 73.9,
+      "count": 3436,
+      "share": 74.0,
       "height": 200
     },
     {
       "en": "Buddhism",
       "zh": "佛教",
-      "count": 479,
+      "count": 482,
       "share": 10.4,
       "height": 36
     },
     {
       "en": "Roman Catholic",
       "zh": "天主教",
-      "count": 371,
+      "count": 372,
       "share": 8.0,
       "height": 28
     },
     {
       "en": "Taoism",
       "zh": "道教",
-      "count": 117,
+      "count": 118,
       "share": 2.5,
       "height": 16
     },
@@ -206,25 +206,25 @@
     {
       "en": "Protestant Christian",
       "zh": "基督新教",
-      "count": 3417,
-      "share": 73.9
+      "count": 3436,
+      "share": 74.0
     },
     {
       "en": "Buddhism",
       "zh": "佛教",
-      "count": 479,
+      "count": 482,
       "share": 10.4
     },
     {
       "en": "Roman Catholic",
       "zh": "天主教",
-      "count": 371,
+      "count": 372,
       "share": 8.0
     },
     {
       "en": "Taoism",
       "zh": "道教",
-      "count": 117,
+      "count": 118,
       "share": 2.5
     },
     {
@@ -279,8 +279,8 @@
   "denominations": [
     {
       "en": "Independent",
-      "count": 1254,
-      "share": 36.7
+      "count": 1273,
+      "share": 37.0
     },
     {
       "en": "Baptist",
@@ -290,12 +290,12 @@
     {
       "en": "Lutheran",
       "count": 413,
-      "share": 12.1
+      "share": 12.0
     },
     {
       "en": "Evangelical",
       "count": 304,
-      "share": 8.9
+      "share": 8.8
     },
     {
       "en": "Alliance",
@@ -347,50 +347,50 @@
     {
       "en": "Mutual aid",
       "zh": "互助服務",
-      "count": 84,
-      "share": 28.8
+      "count": 87,
+      "share": 27.4
     },
     {
       "en": "Kaifong welfare",
       "zh": "街坊福利",
       "count": 72,
-      "share": 24.7
+      "share": 22.6
     },
     {
       "en": "Civil society",
       "zh": "公民社會",
-      "count": 48,
-      "share": 16.4
-    },
-    {
-      "en": "Patriotic-named",
-      "zh": "愛國建制",
-      "count": 25,
-      "share": 8.6
+      "count": 58,
+      "share": 18.2
     },
     {
       "en": "Unclear",
       "zh": "不明",
-      "count": 24,
-      "share": 8.2
+      "count": 30,
+      "share": 9.4
+    },
+    {
+      "en": "Patriotic-named",
+      "zh": "愛國建制",
+      "count": 27,
+      "share": 8.5
     },
     {
       "en": "Owners / residents",
       "zh": "業主居民",
-      "count": 17,
-      "share": 5.8
+      "count": 22,
+      "share": 6.9
     },
     {
       "en": "Rural / indigenous",
       "zh": "鄉事原居民",
       "count": 15,
-      "share": 5.1
+      "share": 4.7
     },
     {
       "en": "Native-place",
       "zh": "同鄉",
       "count": 7,
-      "share": 2.4
+      "share": 2.2
     }
   ]
 }

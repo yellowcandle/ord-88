@@ -30,4 +30,4 @@ Preconditions: doctor passes on `http://127.0.0.1:8811`, and `dist/data.json` is
 - The hero number and the footer count are the same value rendered twice; a mismatch between them means the build is inconsistent, and both must be reported.
 - The stamp comes from the CSV header (`Position as at`), not from the file mtime; re-running the pipeline does not move the date.
 - `as_at` is English long form (`30 September 2026`) while `as_at_zh` is `2026年9月30日`; comparing the wrong field is the usual false failure.
-- A build with unclassified societies still renders; the warning on stderr is the only signal, so capture stderr with the proof.
+- A build with unclassified societies exits 2 unless `--allow-incomplete` is passed; with the flag it renders, and the warning on stderr is the signal to capture with the proof.

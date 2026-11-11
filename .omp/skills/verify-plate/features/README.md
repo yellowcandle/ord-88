@@ -10,7 +10,7 @@ The page is a static build artifact: `python3 build_site.py` turns the repo's CS
 - The build is served over HTTP at `http://127.0.0.1:8811` from `dist/`, as a named service `plate-verify`.
 - `.omp/skills/verify-plate/scripts/doctor.sh 8811` exits 0.
 - `dist/data.json` is the file the assertions compare against; copy it into the run's evidence directory first.
-- Never drive an instance another run started, and never drive `file://` — the fonts 404 there.
+- Never drive an instance another run started, and never drive `file://` — serve over HTTP so the doctor's byte-identity check and the browser proof exercise the same document.
 
 ## Driving conventions
 
@@ -25,7 +25,7 @@ The page is a static build artifact: `python3 build_site.py` turns the repo's CS
 
 - Capture the rendered state and the data it came from, not only the final screen.
 - UI proof includes a full-page screenshot, a viewport screenshot of the section in question, and a selector/expected/observed line per assertion.
-- Include the build stdout/stderr and the warning lines about unclassified societies.
+- Include the build stdout/stderr. If `--allow-incomplete` was used, include the warning lines about unclassified societies.
 - Record the feature ID and entry point used with every artifact.
 - Report an unreachable path with the attempted selector and the unmet precondition.
 - Do not report a section as verified because the page loaded; each section's own numbers must be checked.
