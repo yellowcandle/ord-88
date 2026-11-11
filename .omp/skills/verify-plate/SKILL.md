@@ -15,9 +15,9 @@ Feature recipes live in [`features/README.md`](features/README.md). Read it befo
 python3 build_site.py
 ```
 
-Writes `dist/index.html`, `dist/data.json`, and refreshes `dist/fonts/`. A build that only warns about unclassified societies still succeeds; capture the warning text, it is part of the proof.
+Writes `dist/index.html`, `dist/data.json`, and refreshes `dist/fonts/`. A stale sub-file makes the build exit 2 without writing `dist/`; rerun the matching `classify_sub.py` command. For a deliberate partial proof, `python3 build_site.py --allow-incomplete` writes the page and prints the warning; capture that text as part of the proof.
 
-Serve the built directory (never `file://` — the `@font-face` files 404 there and the page renders in fallback fonts):
+Serve the built directory over HTTP so the proof matches the documented path and relative font URLs resolve:
 
 ```bash
 python3 -m http.server 8811 --directory dist
@@ -82,7 +82,7 @@ Write proof to `verify-artifacts/<run-id>/` in the repo root (`<run-id>` = ISO d
 - `data.json` — a copy of the build output the assertions were compared against.
 - `git-diff-dist.txt` — `git diff --stat dist/` (and `--numstat` if sizes move), because the build rewrites tracked files.
 
-Standards: exercise the real page over HTTP, not the HTML file on disk. Capture the rendered state, not the source template. Never delete `verify-artifacts/` during cleanup. Verification artifacts are not git-ignored, so leave them out of commits.
+Standards: exercise the real page over HTTP, not the HTML file on disk. Capture the rendered state, not the source template. Never delete `verify-artifacts/` during cleanup. Verification artifacts are git-ignored, so they never enter a commit.
 
 ## Cleanup
 

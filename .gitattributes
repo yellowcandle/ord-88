@@ -1,0 +1,7 @@
+# The IRD exports and generated CSVs use CRLF; do not report the CR as
+# trailing whitespace in diffs. Line endings are left to the files themselves.
+*.csv whitespace=cr-at-eol
+
+*.woff2 binary
+*.png binary
+*.pdf binary

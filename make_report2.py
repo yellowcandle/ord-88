@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """Enhanced report: main categories + religion sub-breakdown + community socio-political."""
-import csv, json
+# ruff: noqa: I001 — the matplotlib backend must be selected before pyplot is imported.
+import csv
 from collections import Counter, defaultdict
-import matplotlib; matplotlib.use("Agg")
+
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
 
@@ -61,7 +64,7 @@ def table(counts,namemap,ex):
 L=["# HK Section-88 Charities — Religious & Community Sub-Breakdowns","",
  "*LLM sub-classification via `qwen/qwen3.7-plus`. Religion/denomination and socio-political",
  "character are **inferred from organisation names** and are indicative, not authoritative.*","",
- "## Religious groups by religion","",f"![religion](s88_religion.png)","",
+ "## Religious groups by religion","","![religion](s88_religion.png)","",
  table(relig,RELNAME,relex),"","### Protestant denominations","",
  "| Denomination | Count |","|---|---:|"]
 for d,n in denom.most_common():

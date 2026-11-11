@@ -6,7 +6,9 @@
 > **2026-04-30** register snapshot (17,591 entries) and the categorisation current at
 > that time. The register has since been refreshed to **30 September 2026** (17,623
 > entries) and the sub-classification re-run; the framework comparison, bundle sizes
-> and recommendation are unaffected by that data change.
+> and recommendation are unaffected by that data change. The interactive explorer
+> itself was not built: the shipped artefact is the static plate documented in
+> [`docs/plate.md`](../docs/plate.md).
 
 ## Verdict
 

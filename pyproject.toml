@@ -1,0 +1,19 @@
+[project]
+name = "ord-88"
+version = "0.1.0"
+description = "Static Section 88 register plate"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+report = ["matplotlib>=3.8"]
+dev = ["ruff>=0.5"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+# Errors, imports and real undefined names; the legacy report scripts use semicolons
+# heavily, so E7 style checks are not a gate here.
+select = ["E4", "E9", "F", "I"]
