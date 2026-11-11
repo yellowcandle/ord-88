@@ -118,7 +118,9 @@ def call(names, attempts=4):
 
 def main(argv: list[str] | None = None) -> int:
     args = list(sys.argv[1:] if argv is None else argv)
-    limit = int(args[0]) if args and args[0].isdigit() else None
+    if len(args) > 1 or (args and not args[0].isdigit()):
+        raise SystemExit("usage: classify_or.py [LIMIT]")
+    limit = int(args[0]) if args else None
     try:
         with open(SRC, encoding="utf-8-sig", newline="") as f:
             data = [r for r in list(csv.reader(f))[1:] if any(c.strip() for c in r)]
@@ -179,7 +181,7 @@ def main(argv: list[str] | None = None) -> int:
     except OSError as error:
         raise SystemExit(f"cannot write category_counts.json: {error}") from None
     write_meta(model=MODEL, prompt_version=PROMPT_VERSION, fallback_rows=failed_rows,
-               updated_by=["classify_or.py"])
+               updated_by=["classify_or.py"], stage="main", source_changed=True)
     print("DONE", dict(counts), flush=True)
     if failed_rows:
         print(f"WARNING: {failed_rows} rows fell back to keyword guesses; re-run before shipping",

@@ -13,10 +13,11 @@ import json
 import pathlib
 import re
 import sys
+import tempfile
 import unittest
 import urllib.error
 from collections import Counter
-from contextlib import redirect_stderr
+from contextlib import redirect_stderr, redirect_stdout
 from email.message import Message
 from html.parser import HTMLParser
 from unittest import mock
@@ -25,6 +26,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
 import apply_rescue
 import build_site
+import classify_or
 import classify_sub
 import provenance
 
@@ -182,6 +184,11 @@ class AggregateTest(unittest.TestCase):
             build_site.allocate([1, 1], 561)
         self.assertEqual(build_site.share(0, 0), 0.0)
 
+    def test_unclassified_rejects_an_oversized_sub_file(self):
+        self.assertEqual(build_site.unclassified(5, 3, "religion"), 2)
+        with self.assertRaises(ValueError):
+            build_site.unclassified(3, 4, "religion")
+
 
 class ProvenanceTest(unittest.TestCase):
     def test_manifest_matches_this_register(self):
@@ -205,8 +212,63 @@ class ProvenanceTest(unittest.TestCase):
         self.assertEqual(counts["counts"], dict(Counter(row["code"] for row in rows)))
 
     def test_backfill_will_not_overwrite_a_manifest(self):
-        with mock.patch.object(provenance, "META", ROOT / "categorisation_meta.json"):
+        with (
+            mock.patch.object(provenance, "META", ROOT / "categorisation_meta.json"),
+            redirect_stderr(io.StringIO()),
+        ):
             self.assertEqual(provenance.main(["--legacy"]), 1)
+
+    def test_manifest_refuses_a_changed_source(self):
+        with tempfile.TemporaryDirectory() as directory:
+            meta = pathlib.Path(directory) / "meta.json"
+            with (
+                mock.patch.object(provenance, "META", meta),
+                mock.patch.object(provenance, "SUB_FILES", ()),
+                mock.patch.object(provenance, "row_count", return_value=1),
+                mock.patch.object(provenance, "sha256", side_effect=["a", "b"]),
+            ):
+                provenance.write_meta(model="m", stage="main", source_changed=True)
+                with self.assertRaises(SystemExit):
+                    provenance.write_meta(model="m")
+
+    def test_check_source_refuses_register_drift(self):
+        with tempfile.TemporaryDirectory() as directory:
+            meta = pathlib.Path(directory) / "meta.json"
+            meta.write_text(json.dumps({"source_sha256": "a"}), encoding="utf-8")
+            with (
+                mock.patch.object(provenance, "META", meta),
+                mock.patch.object(provenance, "sha256", return_value="b"),
+            ):
+                with self.assertRaises(SystemExit):
+                    provenance.check_source()
+
+    def test_manifest_records_each_stage(self):
+        with tempfile.TemporaryDirectory() as directory:
+            meta = pathlib.Path(directory) / "meta.json"
+            with (
+                mock.patch.object(provenance, "META", meta),
+                mock.patch.object(provenance, "SUB_FILES", ()),
+                mock.patch.object(provenance, "row_count", return_value=1),
+                mock.patch.object(provenance, "sha256", return_value="a"),
+            ):
+                provenance.write_meta(
+                    model="main-model", prompt_version="m1", fallback_rows=2,
+                    stage="main", source_changed=True,
+                )
+                provenance.write_meta(
+                    model="sub-model", prompt_version="s1", fallback_rows=0,
+                    stage="religion",
+                )
+                stored = json.loads(meta.read_text(encoding="utf-8"))
+        self.assertEqual(stored["stages"]["main"]["model"], "main-model")
+        self.assertEqual(stored["stages"]["religion"]["fallback_rows"], 0)
+        self.assertEqual(stored["model"], "sub-model")
+
+
+class ClassifierArgsTest(unittest.TestCase):
+    def test_unknown_arguments_are_rejected(self):
+        with self.assertRaises(SystemExit):
+            classify_or.main(["--dry-run"])
 
     def test_categorisation_rows_follow_the_register(self):
         with (ROOT / "s88list.csv").open(encoding="utf-8-sig", newline="") as handle:
@@ -226,6 +288,14 @@ class BuildGuardTest(unittest.TestCase):
         with (
             mock.patch.object(build_site, "aggregate", return_value=data),
             mock.patch.object(build_site, "render", side_effect=AssertionError("must not render")),
+            redirect_stderr(io.StringIO()),
+        ):
+            self.assertEqual(build_site.main([]), 2)
+
+    def test_stale_source_refuses_to_build(self):
+        with (
+            mock.patch.object(build_site, "check_source", side_effect=SystemExit("changed")),
+            mock.patch.object(build_site, "aggregate", side_effect=AssertionError("must not aggregate")),
             redirect_stderr(io.StringIO()),
         ):
             self.assertEqual(build_site.main([]), 2)
@@ -273,6 +343,22 @@ class RescuePipelineTest(unittest.TestCase):
             self.skipTest("no rescue file in this checkout")
         with self.assertRaises(apply_rescue.AlreadyApplied):
             apply_rescue.merge(read_rows("s88list_categorised.csv"), read_rows("sub_rescue.csv"))
+
+    def test_already_applied_rescue_is_a_no_op(self):
+        if not (ROOT / "sub_rescue.csv").exists():
+            self.skipTest("no rescue file in this checkout")
+        meta = ROOT / "categorisation_meta.json"
+        categories = ROOT / "s88list_categorised.csv"
+        before = (meta.read_bytes(), categories.read_bytes())
+        with redirect_stdout(io.StringIO()):
+            self.assertEqual(apply_rescue.main(), 0)
+        self.assertEqual((meta.read_bytes(), categories.read_bytes()), before)
+
+    def test_applied_rescue_audit_is_not_overwritten(self):
+        if not (ROOT / "sub_rescue.csv").exists():
+            self.skipTest("no rescue file in this checkout")
+        with self.assertRaises(SystemExit):
+            classify_sub.main(["rescue"])
 
     def test_previous_alignment_reuses_labels_and_spots_insertions(self):
         old = [self.row("A"), self.row("B"), self.row("B"), self.row("D")]

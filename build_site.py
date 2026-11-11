@@ -15,6 +15,7 @@ from collections import Counter
 from html import escape
 from typing import Iterable
 
+from provenance import check_source
 from taxonomy import COMMUNITY_LABELS as COMMUNITY
 from taxonomy import RELIGION_LABELS as RELIGIONS
 
@@ -55,7 +56,10 @@ def read_counts(path: pathlib.Path, column: str) -> Counter:
 
 
 def allocate(counts: Iterable[int], total_px: int, quantum: int = 4, minimum: int = 8) -> list[int]:
-    """Split exactly ``total_px`` between ``counts`` in whole ``quantum`` steps."""
+    """Split exactly ``total_px`` between ``counts`` in whole ``quantum`` steps.
+
+    ``total_px`` must be a multiple of ``quantum``; callers pass fixed layout budgets.
+    """
     counts = list(counts)
     if not counts:
         return []
@@ -81,6 +85,15 @@ def allocate(counts: Iterable[int], total_px: int, quantum: int = 4, minimum: in
 
 def share(count: int, total: int) -> float:
     return 0.0 if total == 0 else round(count / total * 100, 1)
+
+
+def unclassified(band: int, labelled: int, kind: str) -> int:
+    """Rows in a band without a sub-label; reject a sub-file larger than its band."""
+    if labelled > band:
+        raise ValueError(
+            f"sub_{kind}.csv has {labelled} rows but the {kind} band has {band} — regenerate it"
+        )
+    return band - labelled
 
 
 def aggregate(root: pathlib.Path) -> dict:
@@ -167,12 +180,12 @@ def aggregate(root: pathlib.Path) -> dict:
         "as_at_zh": as_at_zh,
         "religious_band": religious_band,
         "religious_total": religious_total,
-        "religious_unclassified": max(0, religious_band - religious_total),
+        "religious_unclassified": unclassified(religious_band, religious_total, "religion"),
         "tradition_count": len(religion_counts),
         "denomination_count": len(denomination_rows),
         "denomination_total": protestant_total,
         "community_total": community_total,
-        "community_unclassified": max(0, codes.get("COM", 0) - community_total),
+        "community_unclassified": unclassified(codes.get("COM", 0), community_total, "community"),
         "purposes": purposes,
         "stage1": stage1,
         "traditions": stage2,
@@ -459,7 +472,11 @@ def main(argv: list[str] | None = None) -> int:
     allow_incomplete = "--allow-incomplete" in args
     root = pathlib.Path(__file__).resolve().parent
     try:
+        check_source()
         data = aggregate(root)
+    except SystemExit as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        return 2
     except (OSError, ValueError) as error:
         print(f"ERROR: {error}", file=sys.stderr)
         return 2

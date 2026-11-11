@@ -8,12 +8,14 @@
     "sub_community.csv": "f19e3129c6048e21cd858d05818901943fc925b89d6eabae3e481e274b78d646",
     "sub_rescue.csv": "27b21ceff13b0bbfc42b2ee0bb25fd8cc59cca799ecdc5d060c82295522806db"
   },
-  "model": "qwen/qwen3.7-plus",
-  "prompt_version": "1f4db290e009",
-  "fallback_rows": 0,
+  "model": "mixed (see stages)",
+  "prompt_version": "mixed (see stages)",
   "updated_by": [
-    "classify_sub.py community",
-    "apply_rescue.py"
+    "classify_or.py",
+    "classify_sub.py rescue",
+    "apply_rescue.py",
+    "classify_sub.py religion",
+    "classify_sub.py community"
   ],
   "applied": [
     "sub_rescue.csv"
@@ -25,5 +27,41 @@
         "apply_rescue.py"
       ]
     }
-  ]
+  ],
+  "stages": {
+    "main": {
+      "model": "unknown (pre-manifest)",
+      "prompt_version": "pre-manifest",
+      "backfilled": true,
+      "note": "labels produced before the manifest was introduced"
+    },
+    "rescue": {
+      "model": "qwen/qwen3.7-plus",
+      "prompt_version": "1d28f2a7adc3",
+      "backfilled": true,
+      "note": "source of the 85 rows applied below; fallback count was not recorded at the time"
+    },
+    "religion": {
+      "model": "qwen/qwen3.7-plus",
+      "prompt_version": "1be1f7938bbe",
+      "fallback_rows": 0,
+      "backfilled": true,
+      "note": "24 labels added, 4621 reused unchanged"
+    },
+    "community": {
+      "model": "qwen/qwen3.7-plus",
+      "prompt_version": "1f4db290e009",
+      "fallback_rows": 0,
+      "backfilled": true,
+      "note": "26 labels added, 292 reused unchanged"
+    },
+    "rescue-apply": {
+      "applied": [
+        "sub_rescue.csv"
+      ],
+      "backfilled": true,
+      "note": "85 rows reclassified"
+    }
+  },
+  "note": "Stages were backfilled after the 2026-11-11 run; the main labels predate the manifest."
 }

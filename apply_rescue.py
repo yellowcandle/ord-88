@@ -13,7 +13,7 @@ import pathlib
 import tempfile
 from collections import Counter
 
-from provenance import write_meta
+from provenance import check_source, write_meta
 from taxonomy import CATEGORY_LABELS
 
 CATS = "s88list_categorised.csv"
@@ -88,21 +88,20 @@ def write_counts(rows):
 
 
 def main() -> int:
+    check_source()
     rows = read_rows(CATS)
     rescue = read_rows(RESCUE)
     try:
         rows, changed = merge(rows, rescue)
     except AlreadyApplied:
-        rows = read_rows(CATS)
-        write_counts(rows)
-        write_meta(updated_by=["apply_rescue.py"])
-        print(f"{RESCUE} is already merged; category_counts.json refreshed; nothing to do")
+        print(f"{RESCUE} is already merged; nothing to do")
         return 0
     except ValueError as error:
         raise SystemExit(str(error)) from None
     write_rows(CATS, rows)
     write_counts(rows)
-    write_meta(applied=[RESCUE], updated_by=["apply_rescue.py"])
+    write_meta(applied=[RESCUE], updated_by=["apply_rescue.py"], stage="rescue-apply",
+               note=f"{changed} rows reclassified")
     print(f"applied {changed} rescues; {len(rows) - changed} rows unchanged")
     print("Next: refresh the positional sub-files, then rebuild:")
     print("  python3 classify_sub.py religion --since HEAD")

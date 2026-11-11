@@ -31,7 +31,7 @@ import urllib.error
 import urllib.request
 from collections import Counter
 
-from provenance import write_meta
+from provenance import check_source, write_meta
 from taxonomy import COMMUNITY_CODES, MAIN_CODES, RELIGION_CODES
 
 MODEL = "qwen/qwen3.7-plus"
@@ -239,6 +239,7 @@ def write_sub_rows(path: str, labels, rows) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     mode, since = parse_args(list(sys.argv[1:] if argv is None else argv))
+    check_source()
     hdr, valid = PROMPTS[mode]
     want = {"rescue": "OTH", "religion": "REL", "community": "COM"}[mode]
     try:
@@ -246,6 +247,17 @@ def main(argv: list[str] | None = None) -> int:
             rows = [row for row in csv.DictReader(handle) if row["code"] == want]
     except OSError as error:
         raise SystemExit(f"cannot read s88list_categorised.csv: {error}") from None
+    if mode == "rescue" and pathlib.Path("sub_rescue.csv").exists():
+        try:
+            with open("sub_rescue.csv", encoding="utf-8-sig", newline="") as handle:
+                existing = sum(1 for _ in csv.DictReader(handle))
+        except OSError as error:
+            raise SystemExit(f"cannot read sub_rescue.csv: {error}") from None
+        if existing > len(rows):
+            raise SystemExit(
+                f"sub_rescue.csv holds {existing} labels but only {len(rows)} OTH rows remain; "
+                "it is an applied audit file — rename or remove it before regenerating rescue output"
+            )
     names = [(row["chinese_name"] or row["english_name"]).strip() for row in rows]
     print(f"mode={mode} n={len(names)}", flush=True)
 
@@ -308,7 +320,7 @@ def main(argv: list[str] | None = None) -> int:
         print("COUNTS", dict(Counter(labels).most_common()))
 
     write_meta(model=MODEL, prompt_version=PROMPT_VERSIONS[mode], fallback_rows=len(failed),
-               updated_by=[f"classify_sub.py {mode}"])
+               updated_by=[f"classify_sub.py {mode}"], stage=mode)
     print(f"DONE {len(out) - len(failed)}/{len(out)} classified", flush=True)
     if failed:
         print(f"WARNING: {len(failed)} rows fell back to {fallback}; see {failures_path}", flush=True)

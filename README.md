@@ -30,12 +30,15 @@ python3 build_site.py
 ```
 
 `--since REF` reuses the labels recorded at that git revision and classifies only
-rows that are new since then. Drop it to re-label every row from scratch. A
-failed row is written with the fallback label, listed in
-`sub_<mode>.failures.csv`, and makes the command exit non-zero.
+rows that are new since then. Point it at a revision whose categorised file and
+sub-files still agree; if you already committed the rescue merge, use the commit
+before it (for example `--since main` or `--since HEAD~1`). Drop `--since` to
+re-label every row from scratch. A failed row is written with the fallback label,
+listed in `sub_<mode>.failures.csv`, and makes the command exit non-zero.
 
 `categorisation_meta.json` records the source hash, model, prompt version, fallback
-count and per-stage history. `python3 provenance.py` prints it.
+count and per-stage history. `stages` holds each pass; the top-level fields describe
+the most recent writer. `python3 provenance.py` prints it.
 
 ## Files
 
