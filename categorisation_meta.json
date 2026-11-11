@@ -1,0 +1,29 @@
+{
+  "source": "s88list.csv",
+  "source_sha256": "ca84b5fcb1362f451213945b439c2d86cb1f95aa2fdea438af51be9c7ede7187",
+  "rows": 17623,
+  "generated_at": "2026-11-11T04:24:09+00:00",
+  "sub_files": {
+    "sub_religion.csv": "6d2e492cb6f44ae3b1361ea5d21fb85ee0ba43a39bfd941b256dae61142dc515",
+    "sub_community.csv": "f19e3129c6048e21cd858d05818901943fc925b89d6eabae3e481e274b78d646",
+    "sub_rescue.csv": "27b21ceff13b0bbfc42b2ee0bb25fd8cc59cca799ecdc5d060c82295522806db"
+  },
+  "model": "qwen/qwen3.7-plus",
+  "prompt_version": "1f4db290e009",
+  "fallback_rows": 0,
+  "updated_by": [
+    "classify_sub.py community",
+    "apply_rescue.py"
+  ],
+  "applied": [
+    "sub_rescue.csv"
+  ],
+  "history": [
+    {
+      "at": "2026-11-11T04:24:09+00:00",
+      "by": [
+        "apply_rescue.py"
+      ]
+    }
+  ]
+}

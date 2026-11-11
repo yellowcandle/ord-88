@@ -9,10 +9,10 @@ character are **inferred from organisation names** and are indicative, not autho
 
 | Category | Count | % | Examples |
 |---|---:|---:|---|
-| Protestant Christian 基督新教 | 3,417 | 73.9% | 基督教418路社區教會有限公司 · 611靈糧堂有限公司 · 611靈糧堂有限公司 |
-| Buddhism 佛教 | 479 | 10.4% | 中華彌勒文化慈善基金會有限公司 · 正念‧慈愛慈善基金有限公司 · 圓通精舍有限公司 |
-| Roman Catholic 天主教 | 371 | 8.0% | Abbot in Hong Kong of  · Abbot in Hong Kong of  · Apostolic Catholic Chu |
-| Taoism 道教 | 117 | 2.5% | 天教六壬良園舘有限公司 · 至和壇有限公司 · 正德道德堂有限公司 |
+| Protestant Christian 基督新教 | 3,436 | 74.0% | 基督教418路社區教會有限公司 · 611靈糧堂有限公司 · 611靈糧堂有限公司 |
+| Buddhism 佛教 | 482 | 10.4% | 中華彌勒文化慈善基金會有限公司 · 正念‧慈愛慈善基金有限公司 · 圓通精舍有限公司 |
+| Roman Catholic 天主教 | 372 | 8.0% | Abbot in Hong Kong of  · Abbot in Hong Kong of  · Apostolic Catholic Chu |
+| Taoism 道教 | 118 | 2.5% | 天教六壬良園舘有限公司 · 至和壇有限公司 · 正德道德堂有限公司 |
 | Chinese folk religion 民間信仰 | 107 | 2.3% | 小西灣南海觀音廟管理委員會 · 觀塘潮僑工商界盂蘭勝會慈善基金有限公司 · 香港仔譚公爺廟有限公司 |
 | Other Christian 其他基督宗教 | 53 | 1.1% | Aglow International Ho · 教會聚會所(基督徒管家) · 教會聚會所(基督徒管家)生命樹教育中心有限公 |
 | Islam 伊斯蘭教 | 40 | 0.9% | Ahmadiyya Muslim Jamat · (中華回教博愛社) · (中華回教博愛社) |
@@ -26,7 +26,7 @@ character are **inferred from organisation names** and are indicative, not autho
 
 | Denomination | Count |
 |---|---:|
-| Independent | 1,254 |
+| Independent | 1,273 |
 | Baptist | 421 |
 | Lutheran | 413 |
 | Evangelical | 304 |
@@ -46,14 +46,14 @@ character are **inferred from organisation names** and are indicative, not autho
 
 | Category | Count | % | Examples |
 |---|---:|---:|---|
-| General mutual-aid 互助服務 | 84 | 28.8% | 恒有餘力互助會 · 愛傳城中心有限公司 · 利眾社有限公司 |
-| Kaifong welfare 街坊福利 | 72 | 24.7% | 石湖新村(河北段)街坊會 · 香港仔街坊福利會有限公司 · 香港仔街坊福利會有限公司 |
-| Civil society / advocacy 公民社會 | 48 | 16.4% | 彩牛居民力量 · 堅離地同樂會慈善基金有限公司 · 全港社區發展連線有限公司 |
-| Patriotic / pro-establishment-named 愛國建制 | 25 | 8.6% | 香港中西區關愛服務及社區發展基金有限公司 · 博愛醫院歷屆總理聯誼會有限公司 · 博愛醫院歷屆總理聯誼會有限公司 |
-| Unclear 不明 | 24 | 8.2% | 安迪潘瑜伽聯盟有限公司 · 護手社 · Beacon Harbour Limited |
-| Owners / residents 業主居民 | 17 | 5.8% | 中西區半山業主聯會(環保回收)有限公司 · 晴雲樓互助委員會 · 社區共融天盛協會有限公司 |
-| Rural / indigenous 鄉事原居民 | 15 | 5.1% | 長洲鄉事委員會 · 山中小市有限公司 · 厦村鄉鄉事委員會 |
-| Native-place 同鄉 | 7 | 2.4% | 香港仔田灣邨華富邨華貴邨潮僑坊眾盂蘭勝會有限 · Connecting Myanmar Lim · 印度之友 |
+| General mutual-aid 互助服務 | 87 | 27.4% | 恒有餘力互助會 · 愛傳城中心有限公司 · 利眾社有限公司 |
+| Kaifong welfare 街坊福利 | 72 | 22.6% | 石湖新村(河北段)街坊會 · 香港仔街坊福利會有限公司 · 香港仔街坊福利會有限公司 |
+| Civil society / advocacy 公民社會 | 58 | 18.2% | 彩牛居民力量 · 堅離地同樂會慈善基金有限公司 · 全港社區發展連線有限公司 |
+| Unclear 不明 | 30 | 9.4% | 昇普計劃 · 安迪潘瑜伽聯盟有限公司 · 護手社 |
+| Patriotic / pro-establishment-named 愛國建制 | 27 | 8.5% | 香港中西區關愛服務及社區發展基金有限公司 · 博愛醫院歷屆總理聯誼會有限公司 · 博愛醫院歷屆總理聯誼會有限公司 |
+| Owners / residents 業主居民 | 22 | 6.9% | 華人永遠墳場管理委員會 · 華人永遠墳場管理委員會 · 華人永遠墳場管理委員會 |
+| Rural / indigenous 鄉事原居民 | 15 | 4.7% | 長洲鄉事委員會 · 山中小市有限公司 · 厦村鄉鄉事委員會 |
+| Native-place 同鄉 | 7 | 2.2% | 香港仔田灣邨華富邨華貴邨潮僑坊眾盂蘭勝會有限 · Connecting Myanmar Lim · 印度之友 |
 
 > **Caveat:** affiliation is inferred from naming patterns (e.g. 鄉事委員會 → rural-indigenous,
 > 街坊福利會 → kaifong-grassroots, 各界聯會/社團聯會 → pro-establishment umbrella). It is a lean for

@@ -12,41 +12,17 @@ import re
 import shutil
 import sys
 from collections import Counter
-from typing import Iterable
 from html import escape
+from typing import Iterable
+
+from taxonomy import COMMUNITY_LABELS as COMMUNITY
+from taxonomy import RELIGION_LABELS as RELIGIONS
 
 CJK = re.compile(r"[\u3400-\u9fff]")
 
 STAGE1_FILLS = ["r1", "r2", "r3", "r4", "r5", "r6", "r7"]
 TRADITION_FILLS = ["r1", "n2", "n3", "n4", "n5"]
 DENOMINATION_FILLS = ["r2", "r3", "r4", "r5", "r6", "r7", "n5"]
-
-RELIGIONS = {
-    "PROT": ("Protestant Christian", "基督新教"),
-    "BUD": ("Buddhism", "佛教"),
-    "CATH": ("Roman Catholic", "天主教"),
-    "TAO": ("Taoism", "道教"),
-    "FOLK": ("Chinese folk religion", "民間信仰"),
-    "CHRX": ("Other Christian", "其他基督宗教"),
-    "ISL": ("Islam", "伊斯蘭教"),
-    "CONF": ("Confucianism", "孔教"),
-    "HIN": ("Hindu", "印度教"),
-    "SIK": ("Sikh", "錫克教"),
-    "JEW": ("Jewish", "猶太教"),
-    "BAHAI": ("Bahá'í", "巴哈伊"),
-    "OTH": ("Other / unclear", "其他／不明"),
-}
-
-COMMUNITY = {
-    "MUTUAL": ("Mutual aid", "互助服務"),
-    "KAIFONG": ("Kaifong welfare", "街坊福利"),
-    "CIVIL": ("Civil society", "公民社會"),
-    "OTH": ("Unclear", "不明"),
-    "RURAL": ("Rural / indigenous", "鄉事原居民"),
-    "OWNERS": ("Owners / residents", "業主居民"),
-    "PATRIOTIC": ("Patriotic-named", "愛國建制"),
-    "NATIVE": ("Native-place", "同鄉"),
-}
 
 def split_label(label: str) -> tuple[str, str]:
     """Split a bilingual CSV label such as ``Education 教育`` into en/zh."""
@@ -81,12 +57,19 @@ def read_counts(path: pathlib.Path, column: str) -> Counter:
 def allocate(counts: Iterable[int], total_px: int, quantum: int = 4, minimum: int = 8) -> list[int]:
     """Split exactly ``total_px`` between ``counts`` in whole ``quantum`` steps."""
     counts = list(counts)
+    if not counts:
+        return []
+    if total_px % quantum:
+        raise ValueError(f"total_px={total_px} is not a multiple of quantum={quantum}")
+    total = sum(counts)
+    if total == 0:
+        counts = [1] * len(counts)
+        total = len(counts)
     units = total_px // quantum
     floor_units = minimum // quantum
     if floor_units * len(counts) > units:
         raise ValueError(f"{len(counts)} bands need more than {total_px}px")
     spare = units - floor_units * len(counts)
-    total = sum(counts)
     exact = [count / total * spare for count in counts]
     whole = [floor_units + int(value) for value in exact]
     shortfall = units - sum(whole)
@@ -97,7 +80,7 @@ def allocate(counts: Iterable[int], total_px: int, quantum: int = 4, minimum: in
 
 
 def share(count: int, total: int) -> float:
-    return round(count / total * 100, 1)
+    return 0.0 if total == 0 else round(count / total * 100, 1)
 
 
 def aggregate(root: pathlib.Path) -> dict:
@@ -105,6 +88,8 @@ def aggregate(root: pathlib.Path) -> dict:
     categories = read_counts(root / "s88list_categorised.csv", "category")
     codes = read_counts(root / "s88list_categorised.csv", "code")
     total = sum(categories.values())
+    if total == 0:
+        raise ValueError("s88list_categorised.csv has no rows — classify the register first")
     purposes = []
     for label, count in categories.most_common():
         en, zh = split_label(label)
@@ -137,39 +122,45 @@ def aggregate(root: pathlib.Path) -> dict:
                 denominations[detail if detail not in ("", "-") else "Unstated"] += 1
 
     religious_total = sum(religion_counts.values())
+    religious_band = codes.get("REL", 0)
+    if religious_band and not religious_total:
+        raise ValueError("REL societies exist but sub_religion.csv is empty — run `classify_sub.py religion`")
     traditions = [
         {"en": RELIGIONS[code][0], "zh": RELIGIONS[code][1], "count": count, "share": share(count, religious_total)}
         for code, count in religion_counts.most_common()
     ]
-    head, tail = traditions[:4], traditions[4:]
-    stage2 = [dict(row) for row in head]
-    stage2.append(
-        {
-            "en": f"{len(tail)} other traditions",
-            "zh": f"其餘{len(tail)}個傳統",
-            "count": sum(row["count"] for row in tail),
-            "share": share(sum(row["count"] for row in tail), religious_total),
-        }
-    )
-    heights = allocate([row["count"] for row in stage2], 300)
-    for row, height in zip(stage2, heights):
-        row["height"] = height
+    stage2 = []
+    if traditions:
+        head, tail = traditions[:4], traditions[4:]
+        stage2 = [dict(row) for row in head]
+        stage2.append(
+            {
+                "en": f"{len(tail)} other traditions",
+                "zh": f"其餘{len(tail)}個傳統",
+                "count": sum(row["count"] for row in tail),
+                "share": share(sum(row["count"] for row in tail), religious_total),
+            }
+        )
+        heights = allocate([row["count"] for row in stage2], 300)
+        for row, height in zip(stage2, heights):
+            row["height"] = height
 
     protestant_total = religion_counts["PROT"]
     denomination_rows = [
         {"en": label.replace("-", " "), "count": count, "share": share(count, protestant_total)}
         for label, count in denominations.most_common()
-    ]
+    ] if protestant_total else []
 
     community_counts = read_counts(root / "sub_community.csv", "result")
     community_total = sum(community_counts.values())
+    if codes.get("COM", 0) and not community_total:
+        raise ValueError("COM societies exist but sub_community.csv is empty — run `classify_sub.py community`")
     community = []
     for code, count in community_counts.most_common():
         key = code.split("/")[0].upper()
         en, zh = COMMUNITY.get(key, (key.title(), ""))
         community.append({"en": en, "zh": zh, "count": count, "share": share(count, community_total)})
 
-    religious_band = codes.get("REL", 0)
     return {
         "total": total,
         "as_at": as_at,
@@ -333,12 +324,13 @@ def render(data: dict) -> str:
         rows = data["denominations"]
         top, tail = rows[:6], rows[6:]
         segments = [(row, fill) for row, fill in zip(top, DENOMINATION_FILLS)]
-        segments.append(
-            (
-                {"en": f"{len(tail)} smaller denominations", "count": sum(row["count"] for row in tail)},
-                DENOMINATION_FILLS[6],
+        if tail:
+            segments.append(
+                (
+                    {"en": f"{len(tail)} smaller denominations", "count": sum(row["count"] for row in tail)},
+                    DENOMINATION_FILLS[len(top)],
+                )
             )
-        )
         total = data["denomination_total"]
         return "".join(
             f'<span style="width:{row["count"] / total * 100:.2f}%;--fill:var(--{fill})" '
@@ -389,6 +381,28 @@ def render(data: dict) -> str:
             f"其中{band}間宗教社團，再分為 {data['tradition_count']} 個傳統，"
             f"其中基督新教再分為 {data['denomination_count']} 個教派。"
         )
+
+    stage2_block = ""
+    if data["traditions"]:
+        lead = data["traditions"][0]
+        stage2_block = f'''<section aria-labelledby="cap-stage2">
+<h2 class="caption" id="cap-stage2">Stage 2 · Traditions within {fmt(data["religious_total"])} · 信仰傳統</h2>
+<div class="trad-chart" aria-hidden="true">
+<div class="trad-source"></div>
+<div class="trad-bands">{trad_bands()}</div>
+<div class="trad-labels">{trad_labels()}</div>
+</div>
+<ul class="sr-only">{"".join(f"<li>{escape(row['en'])}: {fmt(row['count'])}</li>" for row in data["stage2_full"])}</ul>
+<p class="trad-note">{lead["en"]} holds {lead["share"]:.1f}% of the {fmt(data["religious_total"])} classified religious societies — and {lead["count"] / data["total"] * 100:.1f}% of the register.</p>
+</section>'''
+
+    stage3_block = ""
+    if data["denominations"]:
+        stage3_block = f'''<section class="stage3" aria-labelledby="cap-stage3">
+<h2 class="caption" id="cap-stage3">Stage 3 · {data["denomination_count"]} Protestant groupings within {fmt(data["denomination_total"])} · 基督新教分組</h2>
+<div class="denom-strip" aria-hidden="true">{denom_strip()}</div>
+<ul class="denom-list">{denom_rows()}</ul>
+</section>'''
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -418,21 +432,8 @@ def render(data: dict) -> str:
 </div>
 </section>
 <div class="stage-col">
-<section aria-labelledby="cap-stage2">
-<h2 class="caption" id="cap-stage2">Stage 2 · Traditions within {fmt(data["religious_total"])} · 信仰傳統</h2>
-<div class="trad-chart" aria-hidden="true">
-<div class="trad-source"></div>
-<div class="trad-bands">{trad_bands()}</div>
-<div class="trad-labels">{trad_labels()}</div>
-</div>
-<ul class="sr-only">{"".join(f"<li>{escape(row['en'])}: {fmt(row['count'])}</li>" for row in data["stage2_full"])}</ul>
-<p class="trad-note">{data["traditions"][0]["en"]} holds {data["traditions"][0]["share"]:.1f}% of the {fmt(data["religious_total"])} classified religious societies — and {data["traditions"][0]["count"] / data["total"] * 100:.1f}% of the register.</p>
-</section>
-<section class="stage3" aria-labelledby="cap-stage3">
-<h2 class="caption" id="cap-stage3">Stage 3 · {data["denomination_count"]} Protestant groupings within {fmt(data["denomination_total"])} · 基督新教分組</h2>
-<div class="denom-strip" aria-hidden="true">{denom_strip()}</div>
-<ul class="denom-list">{denom_rows()}</ul>
-</section>
+{stage2_block}
+{stage3_block}
 </div>
 </div>
 <section class="schedule-wrap">
@@ -453,27 +454,41 @@ def render(data: dict) -> str:
 """
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> int:
+    args = list(sys.argv[1:] if argv is None else argv)
+    allow_incomplete = "--allow-incomplete" in args
     root = pathlib.Path(__file__).resolve().parent
-    data = aggregate(root)
+    try:
+        data = aggregate(root)
+    except (OSError, ValueError) as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        return 2
+    problems = []
     if data["religious_unclassified"]:
-        print(
-            f"WARNING: {data['religious_unclassified']} religious societies have no faith label — "
-            "regenerate sub_religion.csv with `classify_sub.py religion`",
-            file=sys.stderr,
+        problems.append(
+            f"{data['religious_unclassified']} religious societies have no faith label — "
+            "regenerate sub_religion.csv with `classify_sub.py religion`"
         )
     if data["community_unclassified"]:
-        print(
-            f"WARNING: {data['community_unclassified']} community societies have no community label — "
-            "regenerate sub_community.csv with `classify_sub.py community`",
-            file=sys.stderr,
+        problems.append(
+            f"{data['community_unclassified']} community societies have no community label — "
+            "regenerate sub_community.csv with `classify_sub.py community`"
         )
+    if problems and not allow_incomplete:
+        for problem in problems:
+            print(f"ERROR: {problem}", file=sys.stderr)
+        print("Refusing to write dist/. Fix the inputs or pass --allow-incomplete.", file=sys.stderr)
+        return 2
+    for problem in problems:
+        print(f"WARNING: {problem}", file=sys.stderr)
+
     out = root / "dist"
     out.mkdir(exist_ok=True)
     (out / "data.json").write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
     (out / "index.html").write_text(render(data), encoding="utf-8")
     shutil.copytree(root / "assets" / "fonts", out / "fonts", dirs_exist_ok=True)
     print(f"wrote {out/'index.html'} and {out/'data.json'}")
+    return 0
 
 
 if __name__ == "__main__":
