@@ -6,6 +6,8 @@ plus `dist/data.json`, generated from the committed CSVs.
 
 The register date is read from `s88list.csv`; the build never hardcodes it.
 
+Live plate: <https://yellowcandle.github.io/ord-88/>
+
 ## Rebuild
 
 ```sh
