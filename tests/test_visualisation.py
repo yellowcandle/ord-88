@@ -26,6 +26,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 import apply_rescue
 import build_site
 import classify_sub
+import provenance
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 MONTHS = [
@@ -202,6 +203,10 @@ class ProvenanceTest(unittest.TestCase):
         rows = read_rows("s88list_categorised.csv")
         self.assertEqual(counts["total"], len(rows))
         self.assertEqual(counts["counts"], dict(Counter(row["code"] for row in rows)))
+
+    def test_backfill_will_not_overwrite_a_manifest(self):
+        with mock.patch.object(provenance, "META", ROOT / "categorisation_meta.json"):
+            self.assertEqual(provenance.main(["--legacy"]), 1)
 
     def test_categorisation_rows_follow_the_register(self):
         with (ROOT / "s88list.csv").open(encoding="utf-8-sig", newline="") as handle:

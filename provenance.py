@@ -68,6 +68,9 @@ def write_meta(**fields) -> dict:
 def main(argv: list[str] | None = None) -> int:
     args = list(sys.argv[1:] if argv is None else argv)
     if "--legacy" in args:
+        if META.exists():
+            print(f"{META.name} already exists; refusing to overwrite it", file=sys.stderr)
+            return 1
         meta = write_meta(
             model="unknown (pre-manifest)",
             prompt_version="pre-manifest",
